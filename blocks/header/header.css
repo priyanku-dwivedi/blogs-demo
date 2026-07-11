@@ -1,9 +1,14 @@
-/* header and nav layout */
+/* header and nav layout — 888poker black brand bar */
 header .nav-wrapper {
-  background-color: var(--background-color);
+  background-color: #000;
   width: 100%;
   z-index: 2;
   position: fixed;
+}
+
+header nav,
+header nav a:any-link {
+  color: #fff;
 }
 
 header nav {
@@ -149,8 +154,9 @@ header .nav-brand {
 }
 
 header nav .nav-brand img {
-  width: 128px;
+  width: 101px;
   height: auto;
+  display: block;
 }
 
 /* sections */
@@ -266,7 +272,23 @@ header nav .nav-sections ul > li > ul > li {
   }
 }
 
-/* tools */
+/* tools — Sign Up CTA (888poker yellow) */
 header nav .nav-tools {
   grid-area: tools;
+}
+
+header nav .nav-tools a:any-link {
+  display: inline-block;
+  background-color: #fee92c;
+  color: #000;
+  font-weight: 700;
+  padding: 8px 20px;
+  border-radius: 4px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+header nav .nav-tools a:hover {
+  background-color: #ffd400;
+  color: #000;
 }
