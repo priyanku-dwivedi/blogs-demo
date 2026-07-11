@@ -1,0 +1,38 @@
+{
+  "variantName": "author-header",
+  "baseBlock": "author-header",
+  "version": "1.0.0",
+  "created": "2026-07-11T10:10:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.888poker.com/magazine/author/frederico-pereira",
+    "originPage": "author listing page",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "author-header",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "avatar + name + bio + social links",
+    "buttonCount": 0,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "author listing / author landing pages",
+      "top-of-page author identity banners",
+      "magazine contributor pages"
+    ],
+    "notSuitableFor": [
+      "compact article-foot author bylines (use author-bio)",
+      "team member grids (use cards)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/magazine/author/frederico-pereira"],
+    "reuseCount": 1,
+    "lastUsed": "2026-07-11T10:10:00.000Z"
+  }
+}

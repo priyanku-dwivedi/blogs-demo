@@ -1,0 +1,36 @@
+{
+  "variantName": "category-nav",
+  "baseBlock": "category-nav",
+  "version": "1.0.0",
+  "created": "2026-07-11T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.888poker.com/magazine/",
+    "originPage": "magazine landing / homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "compact",
+    "purpose": "category-navigation",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "single cell list of category links -> styled horizontal tabs",
+    "linkCount": 9
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "magazine / blog category navigation",
+      "horizontal tab-style link bars"
+    ],
+    "notSuitableFor": [
+      "primary site navigation (use header)",
+      "content card grids"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/magazine/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-07-11T00:00:00.000Z"
+  }
+}

@@ -20,6 +20,115 @@
         "name": "keywords",
         "multi": true,
         "label": "Keywords"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "nav",
+        "label": "Navigation Fragment"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "footer",
+        "label": "Footer Fragment"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "template",
+        "label": "Template",
+        "options": [
+          {
+            "name": "Article",
+            "value": "article"
+          },
+          {
+            "name": "Author",
+            "value": "author"
+          },
+          {
+            "name": "Category",
+            "value": "category"
+          },
+          {
+            "name": "Home",
+            "value": "home"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "author",
+        "label": "Author"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "authorPage",
+        "label": "Author Page"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "category",
+        "label": "Category"
+      },
+      {
+        "component": "text",
+        "valueType": "date",
+        "name": "publishedDate",
+        "label": "Published Date"
+      },
+      {
+        "component": "text",
+        "valueType": "date",
+        "name": "lastUpdated",
+        "label": "Last Updated"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "readingTime",
+        "label": "Reading Time"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Social/Feed Image"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "ogHeadline",
+        "label": "Open Graph Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "ogDescription",
+        "label": "Open Graph Description"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "canonical",
+        "label": "Canonical URL"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "robots",
+        "label": "Robots"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "articleTag",
+        "multi": true,
+        "label": "Article Tags"
       }
     ]
   },
@@ -142,6 +251,210 @@
     ]
   },
   {
+    "id": "article-hero",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Hero Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Hero Image Alt",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "meta_category",
+        "label": "Category",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "meta_publishDate",
+        "label": "Publish Date",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "meta_readingTime",
+        "label": "Reading Time",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "author_image",
+        "label": "Author Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "author_name",
+        "label": "Author Name",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "author_link",
+        "label": "Author Link"
+      }
+    ]
+  },
+  {
+    "id": "article-list",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "heading",
+        "label": "Heading",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "filter_author",
+        "label": "Filter by Author (name or author page path)",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "filter_category",
+        "label": "Filter by Category (category name or path)",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "filter_tag",
+        "label": "Filter by Tag (tag name or path)",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "pageSize",
+        "label": "Page Size (cards per Load More)",
+        "value": "6"
+      }
+    ]
+  },
+  {
+    "id": "author-bio",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "label",
+        "label": "Label",
+        "value": "About the Author"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Author Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Author Image Alt",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "author_name",
+        "label": "Author Name",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "author_text",
+        "label": "Bio",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "author_link",
+        "label": "Author Page Link"
+      }
+    ]
+  },
+  {
+    "id": "author-header",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Author Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Author Image Alt",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "name",
+        "label": "Author Name",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "bio",
+        "label": "Bio",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "social_facebook",
+        "label": "Facebook URL"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "social_twitter",
+        "label": "Twitter / X URL"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "social_linkedin",
+        "label": "LinkedIn URL"
+      }
+    ]
+  },
+  {
     "id": "card",
     "fields": [
       {
@@ -161,6 +474,37 @@
     ]
   },
   {
+    "id": "category-header",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title (category or tag name)",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "description",
+        "label": "Description",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "category-nav",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "links",
+        "label": "Category Links (a list of links)",
+        "value": ""
+      }
+    ]
+  },
+  {
     "id": "columns",
     "fields": [
       {
@@ -176,6 +520,71 @@
         "name": "rows",
         "value": "",
         "label": "Rows"
+      }
+    ]
+  },
+  {
+    "id": "embed",
+    "fields": [
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "link",
+        "label": "Embed URL",
+        "description": "URL of the YouTube video, Vimeo video, or Twitter/X post to embed"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "linkText",
+        "label": "Link Text",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "article-card",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image Alt Text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_title",
+        "label": "Title",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "card_titleLink",
+        "label": "Article Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_category",
+        "label": "Category",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_author",
+        "label": "Author",
+        "value": ""
       }
     ]
   },
@@ -212,6 +621,26 @@
         "value": "",
         "label": "Text",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "toc",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title",
+        "value": "Table of contents"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "links",
+        "label": "Links",
+        "description": "Optional explicit list of anchor links. Leave empty to auto-generate from section headings.",
+        "value": ""
       }
     ]
   }

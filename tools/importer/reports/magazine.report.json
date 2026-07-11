@@ -1,0 +1,13 @@
+{
+  "status": "success",
+  "url": "https://www.888poker.com/magazine/",
+  "path": "magazine",
+  "timestamp": "2026-07-11T10:59:15.883Z",
+  "title": "888poker Magazine | 888poker News & Poker Articles",
+  "template": "home",
+  "blocks": [
+    "featured-articles",
+    "category-nav",
+    "article-list"
+  ]
+}

@@ -1,0 +1,28 @@
+.category-header {
+  margin: 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.category-header .category-header-title h1 {
+  margin: 0;
+  font-size: var(--heading-font-size-xl, 45px);
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.category-header .category-header-description {
+  color: var(--dark-color, #505050);
+  max-width: 65ch;
+}
+
+.category-header .category-header-description p {
+  margin: 0 0 8px;
+}
+
+@media (width >= 900px) {
+  .category-header .category-header-title h1 {
+    font-size: var(--heading-font-size-xxl, 55px);
+  }
+}

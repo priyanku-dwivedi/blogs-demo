@@ -21,6 +21,103 @@
           "name": "keywords",
           "multi": true,
           "label": "Keywords"
+        },
+        {
+          "component": "aem-content",
+          "valueType": "string",
+          "name": "nav",
+          "label": "Navigation Fragment"
+        },
+        {
+          "component": "aem-content",
+          "valueType": "string",
+          "name": "footer",
+          "label": "Footer Fragment"
+        },
+        {
+          "component": "select",
+          "valueType": "string",
+          "name": "template",
+          "label": "Template",
+          "options": [
+            { "name": "Article", "value": "article" },
+            { "name": "Author", "value": "author" },
+            { "name": "Category", "value": "category" },
+            { "name": "Home", "value": "home" }
+          ]
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "author",
+          "label": "Author"
+        },
+        {
+          "component": "aem-content",
+          "valueType": "string",
+          "name": "authorPage",
+          "label": "Author Page"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "category",
+          "label": "Category"
+        },
+        {
+          "component": "text",
+          "valueType": "date",
+          "name": "publishedDate",
+          "label": "Published Date"
+        },
+        {
+          "component": "text",
+          "valueType": "date",
+          "name": "lastUpdated",
+          "label": "Last Updated"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "readingTime",
+          "label": "Reading Time"
+        },
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "image",
+          "label": "Social/Feed Image"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "ogHeadline",
+          "label": "Open Graph Title"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "ogDescription",
+          "label": "Open Graph Description"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "canonical",
+          "label": "Canonical URL"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "robots",
+          "label": "Robots"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "articleTag",
+          "multi": true,
+          "label": "Article Tags"
         }
       ]
     }
