@@ -1,0 +1,35 @@
+.toc {
+  border: 1px solid var(--light-color, #eaeaea);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 24px 0;
+  background-color: var(--overlay-background-color, #fafafa);
+}
+
+.toc .toc-title {
+  margin: 0 0 8px;
+  font-size: var(--heading-font-size-s, 20px);
+}
+
+.toc .toc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.toc .toc-list li {
+  margin: 4px 0;
+}
+
+.toc .toc-list .toc-item-sub {
+  padding-left: 16px;
+}
+
+.toc .toc-link {
+  color: var(--link-color, #035fe6);
+  text-decoration: none;
+}
+
+.toc .toc-link:hover {
+  text-decoration: underline;
+}

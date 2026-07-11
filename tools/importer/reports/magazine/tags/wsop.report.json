@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://www.888poker.com/magazine/tags/wsop",
+  "path": "magazine/tags/wsop",
+  "timestamp": "2026-07-11T11:01:12.632Z",
+  "title": "WSOP | 888 Poker Online",
+  "template": "listing",
+  "blocks": [
+    "article-list",
+    "category-header"
+  ]
+}

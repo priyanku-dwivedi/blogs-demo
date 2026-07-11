@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://www.888poker.com/magazine/author/frederico-pereira",
+  "path": "magazine/author/frederico-pereira",
+  "timestamp": "2026-07-11T10:24:09.711Z",
+  "title": "Frederico Pereira | 888 Poker Online",
+  "template": "author",
+  "blocks": [
+    "author-header",
+    "article-list"
+  ]
+}

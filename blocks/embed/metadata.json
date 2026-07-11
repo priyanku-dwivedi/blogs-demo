@@ -1,0 +1,38 @@
+{
+  "variantName": "embed",
+  "baseBlock": "embed",
+  "version": "1.0.0",
+  "created": "2026-07-11T09:16:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.888poker.com/magazine/jason-koon-poker-net-worth",
+    "originPage": "blog article page",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "media-embed",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "link -> iframe/embed",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "blog articles with embedded YouTube videos",
+      "articles with embedded Twitter/X posts",
+      "any page needing external video/social embeds"
+    ],
+    "notSuitableFor": [
+      "self-hosted native video files",
+      "image galleries"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/magazine/jason-koon-poker-net-worth"],
+    "reuseCount": 1,
+    "lastUsed": "2026-07-11T09:16:00.000Z"
+  }
+}

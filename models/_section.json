@@ -50,7 +50,10 @@
         "hero",
         "cards",
         "columns",
-        "fragment"
+        "fragment",
+        "article-list",
+        "featured-articles",
+        "category-nav"
       ]
     }
   ]

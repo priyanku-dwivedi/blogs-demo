@@ -1,0 +1,269 @@
+{
+  "metadata": {
+    "projectType": "xwalk"
+  },
+  "templates": [
+    {
+      "name": "article",
+      "urls": [
+        "https://www.888poker.com/magazine/jason-koon-poker-net-worth",
+        "https://www.888poker.com/magazine/chance-kornuth-poker-net-worth",
+        "https://www.888poker.com/magazine/sam-farha-poker-net-worth",
+        "https://www.888poker.com/magazine/bryn-kenney-poker-net-worth"
+      ],
+      "representativeUrl": "https://www.888poker.com/magazine/jason-koon-poker-net-worth",
+      "coverageGaps": [],
+      "description": "Poker blog article page: hero with title/date/reading-time/author, in-page table of contents, default-content rich body with inline video/social embeds, and an author bio.",
+      "blocks": [
+        {
+          "name": "article-hero",
+          "instances": [
+            ".region--content .grid-container-teaser"
+          ]
+        },
+        {
+          "name": "toc",
+          "instances": [
+            "#block-tocforcontentarticlebody",
+            ".block-table-of-contents"
+          ]
+        },
+        {
+          "name": "embed",
+          "instances": [
+            ".field--name-body iframe",
+            ".field--name-body blockquote.twitter-tweet"
+          ]
+        },
+        {
+          "name": "author-bio",
+          "instances": [
+            ".field--name-field-author",
+            ".author_details_full_block"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "hero",
+          "name": "Article Hero",
+          "selector": [
+            ".region--content .grid-container-teaser"
+          ],
+          "style": null,
+          "blocks": [
+            "article-hero"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "toc",
+          "name": "Table of Contents",
+          "selector": [
+            "#block-tocforcontentarticlebody",
+            ".block-table-of-contents"
+          ],
+          "style": "boxed",
+          "blocks": [
+            "toc"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "body",
+          "name": "Article Body",
+          "selector": [
+            ".field--name-body.field--type-text-with-summary"
+          ],
+          "style": null,
+          "blocks": [
+            "embed"
+          ],
+          "defaultContent": [
+            ".field--name-body.field--type-text-with-summary"
+          ]
+        },
+        {
+          "id": "author",
+          "name": "Author Bio",
+          "selector": [
+            ".field--name-field-author",
+            ".author_details_full_block"
+          ],
+          "style": "light",
+          "blocks": [
+            "author-bio"
+          ],
+          "defaultContent": []
+        }
+      ]
+    },
+    {
+      "name": "author",
+      "urls": [
+        "https://www.888poker.com/magazine/author/frederico-pereira",
+        "https://www.888poker.com/magazine/author/hyacinth-swanson"
+      ],
+      "representativeUrl": "https://www.888poker.com/magazine/author/frederico-pereira",
+      "coverageGaps": [],
+      "description": "Author listing page: author-header identity banner (name, portrait, bio, social) followed by a query-driven article-list filtered by author with Load More.",
+      "blocks": [
+        {
+          "name": "author-header",
+          "instances": [
+            ".views-row > article.node--type-author"
+          ]
+        },
+        {
+          "name": "article-list",
+          "instances": [
+            ".view-articles.view-id-articles .view-content"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "author-header",
+          "name": "Author Header",
+          "selector": [
+            ".views-row > article.node--type-author"
+          ],
+          "style": null,
+          "blocks": [
+            "author-header"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "article-listing",
+          "name": "Article Listing",
+          "selector": [
+            ".view-articles.view-id-articles .view-content"
+          ],
+          "style": null,
+          "blocks": [
+            "article-list"
+          ],
+          "defaultContent": []
+        }
+      ]
+    },
+    {
+      "name": "listing",
+      "urls": [
+        "https://www.888poker.com/magazine/poker-world",
+        "https://www.888poker.com/magazine/tags/wsop"
+      ],
+      "representativeUrl": "https://www.888poker.com/magazine/poker-world",
+      "coverageGaps": [],
+      "description": "Category or tag listing page: category-header (term title + optional description) followed by a query-driven article-list filtered by category or tag with Load More.",
+      "blocks": [
+        {
+          "name": "category-header",
+          "instances": [
+            "#block-pagetitle"
+          ]
+        },
+        {
+          "name": "article-list",
+          "instances": [
+            ".view-display-id-page_category_articles .views-infinite-scroll-content-wrapper"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "listing-header",
+          "name": "Listing Header",
+          "selector": [
+            "#block-pagetitle"
+          ],
+          "style": null,
+          "blocks": [
+            "category-header"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "article-listing",
+          "name": "Article Listing",
+          "selector": [
+            ".view-display-id-page_category_articles .views-infinite-scroll-content-wrapper"
+          ],
+          "style": null,
+          "blocks": [
+            "article-list"
+          ],
+          "defaultContent": []
+        }
+      ]
+    },
+    {
+      "name": "home",
+      "urls": [
+        "https://www.888poker.com/magazine/"
+      ],
+      "representativeUrl": "https://www.888poker.com/magazine/",
+      "coverageGaps": [],
+      "description": "Magazine landing page: page-title (default content), hand-curated featured-articles, category-nav, and a query-driven article-list (all categories, newest-first) with Load More.",
+      "blocks": [
+        {
+          "name": "featured-articles",
+          "instances": [
+            ".view-display-id-block_hp_headline"
+          ]
+        },
+        {
+          "name": "category-nav",
+          "instances": [
+            ".view-display-id-block_hp_categories_articles .view-filters"
+          ]
+        },
+        {
+          "name": "article-list",
+          "instances": [
+            ".view-display-id-block_hp_categories_articles .view-content"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "featured",
+          "name": "Featured Articles",
+          "selector": [
+            ".view-display-id-block_hp_headline"
+          ],
+          "style": null,
+          "blocks": [
+            "featured-articles"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "category-nav",
+          "name": "Category Nav",
+          "selector": [
+            ".view-display-id-block_hp_categories_articles .view-filters"
+          ],
+          "style": null,
+          "blocks": [
+            "category-nav"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "latest",
+          "name": "Latest Articles",
+          "selector": [
+            ".view-display-id-block_hp_categories_articles .view-content"
+          ],
+          "style": null,
+          "blocks": [
+            "article-list"
+          ],
+          "defaultContent": []
+        }
+      ]
+    }
+  ]
+}

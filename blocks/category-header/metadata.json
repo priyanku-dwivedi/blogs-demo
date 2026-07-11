@@ -1,0 +1,38 @@
+{
+  "variantName": "category-header",
+  "baseBlock": "category-header",
+  "version": "1.0.0",
+  "created": "2026-07-11T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.888poker.com/magazine/poker-world",
+    "originPage": "888poker magazine category/tag listing page",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "minimal",
+    "purpose": "listing-header",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "title + optional description",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "category listing pages",
+      "tag listing pages",
+      "taxonomy/term archive headers"
+    ],
+    "notSuitableFor": [
+      "author identity headers (use author-header: portrait + bio + social)",
+      "article hero banners (use article-hero)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/magazine/poker-world", "/magazine/tags/wsop"],
+    "reuseCount": 2,
+    "lastUsed": "2026-07-11T00:00:00.000Z"
+  }
+}

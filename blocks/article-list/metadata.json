@@ -1,0 +1,45 @@
+{
+  "variantName": "article-list",
+  "baseBlock": "article-list",
+  "version": "1.0.0",
+  "created": "2026-07-11T10:12:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.888poker.com/magazine/author/frederico-pereira",
+    "originPage": "author listing page",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "query-driven-listing",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "heading + author filter + query-driven card grid + load more",
+    "buttonCount": 1,
+    "imageCount": 0
+  },
+  "queryDriven": {
+    "source": "/query-index.json",
+    "filter": "author (client-side)",
+    "pagination": "load-more / progressive",
+    "defaultPageSize": 6,
+    "cardFields": ["image", "title", "date", "excerpt", "category (optional)"]
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "author listing pages (articles by author)",
+      "category / theme listing pages",
+      "any filtered article index with Load More"
+    ],
+    "notSuitableFor": [
+      "hand-authored static card grids (use cards)",
+      "featured/curated card sets"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/magazine/author/frederico-pereira"],
+    "reuseCount": 1,
+    "lastUsed": "2026-07-11T10:12:00.000Z"
+  }
+}

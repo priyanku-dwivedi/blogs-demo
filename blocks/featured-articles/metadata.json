@@ -1,0 +1,38 @@
+{
+  "variantName": "featured-articles",
+  "baseBlock": "featured-articles",
+  "version": "1.0.0",
+  "created": "2026-07-11T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.888poker.com/magazine/",
+    "originPage": "magazine landing / homepage",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "featured-articles",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "container + repeatable article-card (image + title/link/category + author)",
+    "leadCard": true,
+    "cardCount": 4
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "magazine / blog landing pages",
+      "hand-curated featured article sets",
+      "editorial homepage highlights"
+    ],
+    "notSuitableFor": [
+      "query-driven article listings (use article-list)",
+      "generic image+text card grids (use cards)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/magazine/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-07-11T00:00:00.000Z"
+  }
+}

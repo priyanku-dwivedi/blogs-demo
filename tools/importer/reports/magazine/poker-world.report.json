@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://www.888poker.com/magazine/poker-world",
+  "path": "magazine/poker-world",
+  "timestamp": "2026-07-11T11:01:07.070Z",
+  "title": "Poker World | 888poker Magazine",
+  "template": "listing",
+  "blocks": [
+    "article-list",
+    "category-header"
+  ]
+}

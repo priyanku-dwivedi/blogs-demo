@@ -15,7 +15,10 @@
       "hero",
       "cards",
       "columns",
-      "fragment"
+      "fragment",
+      "article-list",
+      "featured-articles",
+      "category-nav"
     ]
   },
   {
@@ -37,6 +40,12 @@
       "image",
       "button",
       "title"
+    ]
+  },
+  {
+    "id": "featured-articles",
+    "components": [
+      "article-card"
     ]
   }
 ]
