@@ -77,15 +77,53 @@ if (!existsSync(rootContentXml)) {
   writeFileSync(rootContentXml, folderXml, 'utf-8');
 }
 
-// 3. META-INF/vault/filter.xml — cover each page path explicitly
+// 2c. DAM assets — bundle downloaded binaries as dam:Asset nodes.
+// FileVault represents a dam:Asset as: {asset.jpg}/.content.xml (metadata) +
+// {asset.jpg}/_jcr_content/renditions/original.{ext} (the binary).
+// Derive the DAM site root from CONTENT_ROOT (e.g. /content/blogs-888 -> /content/dam/blogs-888).
+const siteName = CONTENT_ROOT.split('/').filter(Boolean).pop();
+const DAM_ROOT = `/content/dam/${siteName}`;
+const damStageDir = join(repo, 'migration-work/dam-assets');
+let damAssetCount = 0;
+if (existsSync(join(damStageDir, 'url-to-dam.json'))) {
+  const damMap = JSON.parse(readFileSync(join(damStageDir, 'url-to-dam.json'), 'utf-8'));
+  const damPaths = [...new Set(Object.values(damMap))];
+  const assetContentXml = (mime) => `<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:dam="http://www.day.com/dam/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+    jcr:primaryType="dam:Asset">
+  <jcr:content jcr:primaryType="dam:AssetContent">
+    <metadata jcr:primaryType="nt:unstructured" dc:format="${mime}"
+        xmlns:dc="http://purl.org/dc/elements/1.1/"/>
+    <renditions jcr:primaryType="nt:folder"/>
+  </jcr:content>
+</jcr:root>
+`;
+  for (const damPath of damPaths) {
+    // damPath like /content/dam/blogs-888/magazine/koon_main-hp-headline-small.jpg
+    const rel = damPath.replace(/^\/content\/dam\/[^/]+\//, ''); // magazine/koon_main...jpg
+    const stageFile = join(damStageDir, rel);
+    if (!existsSync(stageFile)) { continue; }
+    const ext = (rel.split('.').pop() || 'jpg').toLowerCase();
+    const mime = ext === 'png' ? 'image/png' : ext === 'webp' ? 'image/webp' : 'image/jpeg';
+    // asset node dir under jcr_root/content/dam/{site}/{rel}
+    const assetDir = join(jcrRoot, DAM_ROOT.replace(/^\//, ''), rel);
+    mkdirSync(join(assetDir, '_jcr_content', 'renditions'), { recursive: true });
+    writeFileSync(join(assetDir, '.content.xml'), assetContentXml(mime), 'utf-8');
+    // binary as original rendition
+    const bin = readFileSync(stageFile);
+    writeFileSync(join(assetDir, '_jcr_content', 'renditions', `original.${ext}`), bin);
+    damAssetCount += 1;
+  }
+}
+
+// 3. META-INF/vault/filter.xml — cover the content tree + the DAM tree.
 const metaVault = join(pkgDir, 'META-INF/vault');
 mkdirSync(metaVault, { recursive: true });
 
-// Single filter root covering the whole migrated tree — ensures intermediate
-// folder nodes (magazine/tags, magazine/author) install with the pages.
 const filterXml = `<?xml version="1.0" encoding="UTF-8"?>
 <workspaceFilter version="1.0">
   <filter root="${CONTENT_ROOT}"/>
+  <filter root="${DAM_ROOT}"/>
 </workspaceFilter>
 `;
 writeFileSync(join(metaVault, 'filter.xml'), filterXml, 'utf-8');
@@ -127,6 +165,7 @@ const metaInf = join(pkgDir, 'META-INF');
 writeFileSync(join(metaInf, 'MANIFEST.MF'), manifest, 'utf-8');
 
 console.log(`Content root: ${CONTENT_ROOT}`);
+console.log(`DAM root: ${DAM_ROOT}`);
 console.log(`Package tree: ${pkgDir}`);
-console.log(`Pages: ${PAGES.length}, intermediate folders: ${INTERMEDIATE_FOLDERS.length}`);
+console.log(`Pages: ${PAGES.length}, intermediate folders: ${INTERMEDIATE_FOLDERS.length}, DAM assets: ${damAssetCount}`);
 console.log('Now zip the tree (META-INF first) into blogs-demo-content.zip.');
