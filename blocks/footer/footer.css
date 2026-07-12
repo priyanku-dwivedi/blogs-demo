@@ -89,17 +89,16 @@ footer .footer > div:nth-child(3) a[href*="download-poker"]:hover {
   text-decoration: none;
 }
 
-/* 4. payment + regulation logo walls — boxed grid (like live site) */
+/* 4. payment + regulation logo walls — boxed grid (like live site).
+   The deployed fragment wraps each logo in its own <p>, so grid the <p>
+   elements directly (3 per row) rather than the images inside each <p>. */
 footer .footer > div:nth-child(4) {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 24px;
-}
-
-footer .footer > div:nth-child(4) p {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
+}
+
+footer .footer > div:nth-child(4) p {
   margin: 0;
 }
 
@@ -116,7 +115,7 @@ footer .footer > div:nth-child(4) img {
 
 @media (width >= 900px) {
   footer .footer > div:nth-child(4) {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(6, 1fr);
   }
 }
 
