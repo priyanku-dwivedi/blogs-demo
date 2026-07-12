@@ -74,10 +74,12 @@ export default function parse(element, { document }) {
     cells.push(['']);
   }
 
-  // Row: name (richtext).
+  // Row: authorName (richtext). NOTE: the field is intentionally NOT called
+  // "name" — "name" is a reserved attribute on the Franklin block node and
+  // would clobber the block's own name (breaking the author-header class).
   if (nameEl) {
     const frag = document.createDocumentFragment();
-    frag.appendChild(hint('name'));
+    frag.appendChild(hint('authorName'));
     frag.appendChild(nameEl);
     cells.push([frag]);
   } else {

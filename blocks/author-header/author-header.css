@@ -1,33 +1,50 @@
+/* Author header — full-width white card matching 888poker source:
+   name on top, then a round portrait + bio side-by-side, on a rounded
+   white card sitting on the gray magazine page. */
 .author-header {
-  border: 1px solid var(--light-color, #eaeaea);
-  padding: 24px;
+  background-color: #fff;
+  border-radius: 7px;
+  box-shadow: 0 3px 28px 0 rgb(0 0 0 / 16%);
+  padding: 15px 20px;
   margin: 24px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px 20px;
+  align-items: center;
 }
 
 .author-header .author-header-name {
-  font-size: var(--heading-font-size-l, 34px);
+  margin: 0;
+  font-size: 30px;
   font-weight: 700;
   line-height: 1.2;
+  color: #1c1c1c;
 }
 
 .author-header .author-header-name h1,
 .author-header .author-header-name h2 {
   margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
 }
 
 .author-header .author-header-image img {
-  width: 120px;
-  height: 120px;
+  width: 109px;
+  height: 109px;
   border-radius: 50%;
   object-fit: cover;
 }
 
 .author-header .author-header-bio {
-  color: var(--dark-color, #505050);
-  max-width: 65ch;
+  margin: 0;
+  color: #000;
+  font-size: 16px;
+  line-height: 1.15;
+}
+
+.author-header .author-header-social {
+  margin-top: 4px;
 }
 
 .author-header .author-header-social-list {
@@ -43,39 +60,42 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  border: 1px solid var(--light-color, #eaeaea);
-  color: var(--link-color, #035fe6);
+  background-color: var(--text-color, #515151);
+  color: #fff;
   text-decoration: none;
 }
 
 .author-header .author-header-social-link:hover {
-  background-color: var(--light-color, #eaeaea);
+  background-color: #000;
 }
 
 .author-header .author-header-social-link img {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
 }
 
 @media (width >= 900px) {
   .author-header {
-    display: grid;
-    grid-template-columns: 120px 1fr;
-    column-gap: 24px;
-    align-items: start;
+    grid-template-columns: auto 1fr;
+    padding: 15px 25px;
+  }
+
+  .author-header .author-header-name {
+    grid-column: 1 / -1;
   }
 
   .author-header .author-header-image {
-    grid-row: 1 / span 3;
     grid-column: 1;
   }
 
-  .author-header .author-header-name,
-  .author-header .author-header-bio,
-  .author-header .author-header-social {
+  .author-header .author-header-bio {
     grid-column: 2;
+  }
+
+  .author-header .author-header-social {
+    grid-column: 1 / -1;
   }
 }
