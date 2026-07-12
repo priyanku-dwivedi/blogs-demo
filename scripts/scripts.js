@@ -1,4 +1,5 @@
 import {
+  getMetadata,
   loadHeader,
   loadFooter,
   decorateIcons,
@@ -110,11 +111,54 @@ export function decorateButtons(main) {
 }
 
 /**
- * Article pages use a two-column layout: the article body on the left and a
- * sticky Table of Contents sidebar on the right (matching the source design).
- * The importer emits a single body section holding the article content, the
- * author-bio card, a stray author-name paragraph, and the TOC block all
- * stacked. This restructures that section into content + sidebar columns.
+ * Builds the "Poker > Blog > {category} > {title}" breadcrumb shown above the
+ * article on the source. Category comes from page metadata; the title from the
+ * article H1. Returns null when there is no title to anchor it.
+ * @param {Element} hero The article-hero block
+ */
+function buildArticleBreadcrumb(hero) {
+  const title = hero.querySelector('h1, h2');
+  if (!title) return null;
+  const category = (getMetadata('category') || '').trim();
+
+  const nav = document.createElement('nav');
+  nav.className = 'article-breadcrumb';
+  nav.setAttribute('aria-label', 'Breadcrumb');
+  const ol = document.createElement('ol');
+
+  const crumb = (text, href) => {
+    const li = document.createElement('li');
+    if (href) {
+      const a = document.createElement('a');
+      a.href = href;
+      a.textContent = text;
+      li.append(a);
+    } else {
+      li.setAttribute('aria-current', 'page');
+      li.textContent = text;
+    }
+    ol.append(li);
+  };
+
+  crumb('Poker', 'https://www.888poker.com');
+  crumb('Blog', '/magazine');
+  if (category) {
+    const slug = category.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    crumb(category, `/magazine/${slug}`);
+  }
+  crumb(title.textContent.trim());
+
+  nav.append(ol);
+  return nav;
+}
+
+/**
+ * Article pages use a two-column layout: the article (hero + body) on the left
+ * and a sticky Table of Contents sidebar on the right (matching the source
+ * design), with a breadcrumb above. The importer emits the hero in one section
+ * and a body section holding the article content, the author-bio card, a stray
+ * author-name paragraph, and the TOC block all stacked. This restructures them
+ * into content + sidebar columns.
  * @param {Element} main The main element
  */
 function decorateArticleLayout(main) {
@@ -128,15 +172,9 @@ function decorateArticleLayout(main) {
   if (!bodySection) return;
   bodySection.classList.add('article-body-section');
 
-  // In EDS a section holds several wrapper divs as direct children
-  // (.default-content-wrapper, .embed-wrapper, .author-bio-wrapper,
-  // .toc-wrapper, ...). There is no single inner container, so operate on the
-  // section's direct wrapper children.
-  const wrappers = [...bodySection.children];
-
   // Remove the stray standalone author-name paragraph the importer leaves
   // between the body and the TOC (the byline + author-bio already cover it).
-  wrappers.forEach((child) => {
+  [...bodySection.children].forEach((child) => {
     if (child.classList.contains('default-content-wrapper')
       && child.children.length === 1
       && child.firstElementChild.tagName === 'P'
@@ -145,7 +183,7 @@ function decorateArticleLayout(main) {
     }
   });
 
-  // Build the two columns: everything except the TOC goes left; TOC goes right.
+  // Build the two columns: hero + body go left; TOC goes right.
   const contentCol = document.createElement('div');
   contentCol.className = 'article-content';
   const sidebarCol = document.createElement('div');
@@ -160,10 +198,30 @@ function decorateArticleLayout(main) {
     }
   });
 
+  // Pull the hero (and skip-link, if any) from its own section into the top of
+  // the left column so the sidebar aligns with the hero. Then drop the now
+  // empty hero section.
+  const heroSection = hero.closest('.section');
+  const heroWrapper = hero.closest('.article-hero-wrapper') || hero;
+  if (heroSection && heroSection !== bodySection) {
+    // Preserve the skip-to-main-content link at the top of main.
+    const skip = heroSection.querySelector('a[href="#main-content"]');
+    if (skip) {
+      const skipWrap = skip.closest('.default-content-wrapper') || skip.closest('p') || skip;
+      main.prepend(skipWrap);
+    }
+    contentCol.prepend(heroWrapper);
+    if (!heroSection.querySelector('.article-hero')) heroSection.remove();
+  }
+
   const grid = document.createElement('div');
   grid.className = 'article-grid';
   grid.append(contentCol, sidebarCol);
   bodySection.replaceChildren(grid);
+
+  // Breadcrumb above the grid.
+  const breadcrumb = buildArticleBreadcrumb(hero);
+  if (breadcrumb) bodySection.prepend(breadcrumb);
 }
 
 /**
