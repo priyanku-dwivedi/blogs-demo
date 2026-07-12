@@ -3,7 +3,7 @@
   border-radius: 8px;
   padding: 16px 20px;
   margin: 24px 0;
-  background-color: var(--overlay-background-color, #fafafa);
+  background-color: var(--light-color, #fafafa);
 }
 
 .toc .toc-title {

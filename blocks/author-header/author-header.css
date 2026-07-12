@@ -2,7 +2,7 @@
    name on top, then a round portrait + bio side-by-side, on a rounded
    white card sitting on the gray magazine page. */
 .author-header {
-  background-color: #fff;
+  background-color: var(--background-color, #fff);
   border-radius: 7px;
   box-shadow: 0 3px 28px 0 rgb(0 0 0 / 16%);
   padding: 15px 20px;
@@ -18,7 +18,7 @@
   font-size: 30px;
   font-weight: 700;
   line-height: 1.2;
-  color: #1c1c1c;
+  color: var(--heading-color, #1c1c1c);
 }
 
 .author-header .author-header-name h1,
@@ -38,7 +38,7 @@
 
 .author-header .author-header-bio {
   margin: 0;
-  color: #000;
+  color: var(--text-color, #000);
   font-size: 16px;
   line-height: 1.15;
 }
