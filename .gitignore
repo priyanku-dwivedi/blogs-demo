@@ -12,3 +12,7 @@ helix-importer-ui
 !CLAUDE.md
 !AGENTS.md
 migration-work/navigation-validation/
+
+# DAM upload staging (not site code)
+dam-assets/
+dam-assets.zip
