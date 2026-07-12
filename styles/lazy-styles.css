@@ -1,1 +1,36 @@
 /* add global styles that can be loaded post LCP here */
+
+/* Article page two-column layout: article body on the left, sticky Table of
+   Contents sidebar on the right (matching the 888poker source article design).
+   Built by decorateArticleLayout() in scripts.js on pages with an article-hero
+   and a toc block. The .article-grid replaces the section's normal wrapper, so
+   it also carries the standard section max-width and padding. */
+main.article-page .article-body-section .article-grid {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 24px;
+}
+
+main.article-page .article-content {
+  min-width: 0;
+}
+
+main.article-page .article-sidebar {
+  margin-top: 24px;
+}
+
+@media (width >= 900px) {
+  main.article-page .article-body-section .article-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 40px;
+    align-items: start;
+    padding: 0 32px;
+  }
+
+  main.article-page .article-sidebar {
+    margin-top: 0;
+    position: sticky;
+    top: 24px;
+  }
+}

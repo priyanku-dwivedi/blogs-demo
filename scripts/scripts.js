@@ -110,6 +110,63 @@ export function decorateButtons(main) {
 }
 
 /**
+ * Article pages use a two-column layout: the article body on the left and a
+ * sticky Table of Contents sidebar on the right (matching the source design).
+ * The importer emits a single body section holding the article content, the
+ * author-bio card, a stray author-name paragraph, and the TOC block all
+ * stacked. This restructures that section into content + sidebar columns.
+ * @param {Element} main The main element
+ */
+function decorateArticleLayout(main) {
+  const hero = main.querySelector('.article-hero');
+  const toc = main.querySelector('.toc');
+  if (!hero || !toc) return; // not an article page
+
+  main.classList.add('article-page');
+
+  const bodySection = toc.closest('.section');
+  if (!bodySection) return;
+  bodySection.classList.add('article-body-section');
+
+  // In EDS a section holds several wrapper divs as direct children
+  // (.default-content-wrapper, .embed-wrapper, .author-bio-wrapper,
+  // .toc-wrapper, ...). There is no single inner container, so operate on the
+  // section's direct wrapper children.
+  const wrappers = [...bodySection.children];
+
+  // Remove the stray standalone author-name paragraph the importer leaves
+  // between the body and the TOC (the byline + author-bio already cover it).
+  wrappers.forEach((child) => {
+    if (child.classList.contains('default-content-wrapper')
+      && child.children.length === 1
+      && child.firstElementChild.tagName === 'P'
+      && !child.querySelector('a, img, ul, ol, h1, h2, h3')) {
+      child.remove();
+    }
+  });
+
+  // Build the two columns: everything except the TOC goes left; TOC goes right.
+  const contentCol = document.createElement('div');
+  contentCol.className = 'article-content';
+  const sidebarCol = document.createElement('div');
+  sidebarCol.className = 'article-sidebar';
+
+  const tocWrapper = toc.closest('.toc-wrapper') || toc;
+  [...bodySection.children].forEach((child) => {
+    if (child === tocWrapper || child.contains(toc)) {
+      sidebarCol.append(child);
+    } else {
+      contentCol.append(child);
+    }
+  });
+
+  const grid = document.createElement('div');
+  grid.className = 'article-grid';
+  grid.append(contentCol, sidebarCol);
+  bodySection.replaceChildren(grid);
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -155,6 +212,8 @@ async function loadLazy(doc) {
 
   const main = doc.querySelector('main');
   await loadSections(main);
+
+  decorateArticleLayout(main);
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
