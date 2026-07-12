@@ -27,53 +27,53 @@ footer .footer a:hover {
 }
 
 /* 1. social row */
-footer .footer > div:first-child {
+footer .footer > div > div:first-child {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 12px;
 }
 
-footer .footer > div:first-child p {
+footer .footer > div > div:first-child p {
   margin: 0;
 }
 
-footer .footer > div:first-child img {
+footer .footer > div > div:first-child img {
   width: 28px;
   height: 28px;
   vertical-align: middle;
 }
 
-footer .footer > div:first-child a {
+footer .footer > div > div:first-child a {
   margin-right: 8px;
 }
 
 /* 2. link columns */
-footer .footer > div:nth-child(2) {
+footer .footer > div > div:nth-child(2) {
   display: grid;
   grid-template-columns: 1fr;
   gap: 24px;
 }
 
-footer .footer > div:nth-child(2) ul {
+footer .footer > div > div:nth-child(2) ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-footer .footer > div:nth-child(2) li {
+footer .footer > div > div:nth-child(2) li {
   padding: 4px 0;
 }
 
 /* 3. CTA + award logos */
-footer .footer > div:nth-child(3) img {
+footer .footer > div > div:nth-child(3) img {
   height: 40px;
   width: auto;
   margin: 8px 12px 8px 0;
   vertical-align: middle;
 }
 
-footer .footer > div:nth-child(3) a[href*="download-poker"] {
+footer .footer > div > div:nth-child(3) a[href*="download-poker"] {
   display: inline-block;
   background-color: #fee92c;
   color: #000;
@@ -84,7 +84,7 @@ footer .footer > div:nth-child(3) a[href*="download-poker"] {
   margin-bottom: 12px;
 }
 
-footer .footer > div:nth-child(3) a[href*="download-poker"]:hover {
+footer .footer > div > div:nth-child(3) a[href*="download-poker"]:hover {
   background-color: #ffd400;
   text-decoration: none;
 }
@@ -92,17 +92,17 @@ footer .footer > div:nth-child(3) a[href*="download-poker"]:hover {
 /* 4. payment + regulation logo walls — boxed grid (like live site).
    The deployed fragment wraps each logo in its own <p>, so grid the <p>
    elements directly (3 per row) rather than the images inside each <p>. */
-footer .footer > div:nth-child(4) {
+footer .footer > div > div:nth-child(4) .default-content-wrapper {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
 }
 
-footer .footer > div:nth-child(4) p {
+footer .footer > div > div:nth-child(4) p {
   margin: 0;
 }
 
-footer .footer > div:nth-child(4) img {
+footer .footer > div > div:nth-child(4) img {
   box-sizing: border-box;
   width: 100%;
   height: 56px;
@@ -114,20 +114,20 @@ footer .footer > div:nth-child(4) img {
 }
 
 @media (width >= 900px) {
-  footer .footer > div:nth-child(4) {
+  footer .footer > div > div:nth-child(4) .default-content-wrapper {
     grid-template-columns: repeat(6, 1fr);
   }
 }
 
 /* 5. legal text (last region) — no divider, muted small text */
-footer .footer > div:last-child {
+footer .footer > div > div:last-child {
   border-bottom: 0;
   color: #999;
   font-size: 12px;
   line-height: 1.5;
 }
 
-footer .footer > div:last-child p:first-child {
+footer .footer > div > div:last-child p:first-child {
   color: #fff;
   font-weight: 700;
 }
@@ -137,7 +137,7 @@ footer .footer > div:last-child p:first-child {
     padding: 32px;
   }
 
-  footer .footer > div:nth-child(2) {
+  footer .footer > div > div:nth-child(2) {
     grid-template-columns: repeat(5, 1fr);
   }
 }
