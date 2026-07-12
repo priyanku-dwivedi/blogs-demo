@@ -89,27 +89,35 @@ footer .footer > div:nth-child(3) a[href*="download-poker"]:hover {
   text-decoration: none;
 }
 
-/* 4. payment + regulation logo walls */
+/* 4. payment + regulation logo walls — boxed grid (like live site) */
 footer .footer > div:nth-child(4) {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
 }
 
 footer .footer > div:nth-child(4) p {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
   margin: 0;
 }
 
 footer .footer > div:nth-child(4) img {
-  height: 28px;
-  width: auto;
+  box-sizing: border-box;
+  width: 100%;
+  height: 56px;
+  object-fit: contain;
   background: #fff;
-  border-radius: 3px;
-  padding: 2px 4px;
+  border: 1px solid rgb(255 255 255 / 15%);
+  border-radius: 4px;
+  padding: 8px 12px;
+}
+
+@media (width >= 900px) {
+  footer .footer > div:nth-child(4) {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 /* 5. legal text (last region) — no divider, muted small text */
