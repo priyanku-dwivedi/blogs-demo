@@ -70,12 +70,11 @@ for (const folder of INTERMEDIATE_FOLDERS) {
   }
 }
 
-// 2b. Root node definition for CONTENT_ROOT itself (needed for single-root filter)
-const rootContentXml = join(rootFsPath, '.content.xml');
-if (!existsSync(rootContentXml)) {
-  mkdirSync(rootFsPath, { recursive: true });
-  writeFileSync(rootContentXml, folderXml, 'utf-8');
-}
+// 2b. NOTE: Deliberately do NOT ship a .content.xml for CONTENT_ROOT itself.
+// The site root (e.g. /content/blogs-888) is an existing cq:Page. Shipping a
+// sling:Folder node for it — and covering it with a broad filter root — would
+// OVERWRITE the root page with a folder on install. We never touch the root
+// node: filter roots below target only the individual pages/folders/assets.
 
 // 2c. DAM assets — bundle downloaded binaries as dam:Asset nodes.
 // FileVault represents a dam:Asset as: {asset.jpg}/.content.xml (metadata) +
@@ -120,10 +119,22 @@ if (existsSync(join(damStageDir, 'url-to-dam.json'))) {
 const metaVault = join(pkgDir, 'META-INF/vault');
 mkdirSync(metaVault, { recursive: true });
 
+// Scope the filter to the individual pages, intermediate folders, and DAM
+// assets — NEVER the CONTENT_ROOT node itself. This guarantees the install
+// cannot overwrite/replace the existing site root page.
+const pageRoots = PAGES.map(([, p]) => `${CONTENT_ROOT}/${p}`);
+const folderRoots = INTERMEDIATE_FOLDERS.map((f) => `${CONTENT_ROOT}/${f}`);
+// One DAM filter root per site subfolder used (e.g. /content/dam/blogs-888/magazine)
+const damSubRoots = [...new Set(
+  (existsSync(join(damStageDir, 'url-to-dam.json'))
+    ? Object.values(JSON.parse(readFileSync(join(damStageDir, 'url-to-dam.json'), 'utf-8')))
+    : []
+  ).map((damPath) => damPath.replace(/\/[^/]+$/, '')), // strip filename -> folder
+)];
+const allRoots = [...pageRoots, ...folderRoots, ...damSubRoots];
 const filterXml = `<?xml version="1.0" encoding="UTF-8"?>
 <workspaceFilter version="1.0">
-  <filter root="${CONTENT_ROOT}"/>
-  <filter root="${DAM_ROOT}"/>
+${allRoots.map((r) => `  <filter root="${r}"/>`).join('\n')}
 </workspaceFilter>
 `;
 writeFileSync(join(metaVault, 'filter.xml'), filterXml, 'utf-8');
