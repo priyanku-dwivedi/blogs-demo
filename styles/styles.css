@@ -337,24 +337,3 @@ main .section.highlight {
   margin: 0;
   padding: 40px 0;
 }
-
-/* Dark-mode fixes for blocks that use literal light colors instead of tokens,
-   so their surfaces follow the theme (the header bar stays black in both).
-   Placed at end of file to satisfy no-descending-specificity. */
-:root.dark .author-header {
-  background-color: var(--light-color);
-}
-
-:root.dark .author-header .author-header-bio {
-  color: var(--text-color);
-}
-
-:root.dark .article-list .article-list-card-title,
-:root.dark .article-list .article-list-card-title a {
-  color: var(--heading-color);
-}
-
-:root.dark .toc {
-  border-color: var(--light-color);
-  background-color: var(--light-color);
-}
