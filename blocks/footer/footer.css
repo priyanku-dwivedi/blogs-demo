@@ -65,10 +65,12 @@ footer .footer > div > div:nth-child(2) li {
   padding: 4px 0;
 }
 
-/* 3. CTA + award logos */
+/* 3. CTA + award logos — Get Started centered on its own line,
+   award logos centered in a wrapping row beneath it (matches source). */
 footer .footer > div > div:nth-child(3) .default-content-wrapper {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
   gap: 12px;
 }
@@ -151,4 +153,11 @@ footer .footer > div > div:last-child p:first-child {
   footer .footer > div > div:nth-child(2) .default-content-wrapper {
     grid-template-columns: repeat(5, 1fr);
   }
+}
+
+/* Region 3 CTA: force "Get Started" onto its own centered full-width line.
+   Placed last so its higher specificity does not precede plainer p rules. */
+footer .footer > div > div:nth-child(3) .default-content-wrapper p:has(a[href*="download-poker"]) {
+  flex-basis: 100%;
+  text-align: center;
 }
