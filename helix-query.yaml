@@ -21,16 +21,16 @@ indices:
         select: head > meta[name="author"]
         value: attribute(el, "content")
       authorPage:
-        select: head > meta[name="author-page"]
+        select: head > meta[name="authorpage"]
         value: attribute(el, "content")
       category:
         select: head > meta[name="category"]
         value: attribute(el, "content")
       publishedDate:
-        select: head > meta[name="published-date"]
+        select: head > meta[name="publisheddate"]
         value: attribute(el, "content")
       readingTime:
-        select: head > meta[name="reading-time"]
+        select: head > meta[name="readingtime"]
         value: attribute(el, "content")
       image:
         select: head > meta[property="og:image"]
