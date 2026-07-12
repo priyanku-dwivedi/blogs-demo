@@ -42,6 +42,20 @@
   --nav-height: 64px;
 }
 
+/* Dark color theme — toggled from the nav (matches the source dark mode).
+   Flips the surface/text tokens so all components that use the variables
+   follow along. The header keeps its black brand bar in both modes. */
+:root.dark {
+  --background-color: #1c1c1c;
+  --page-background-color: #121212;
+  --light-color: #2a2a2a;
+  --dark-color: #e5e3e3;
+  --text-color: #d6d6d6;
+  --heading-color: #fff;
+  --link-color: #4ea3ff;
+  --link-hover-color: #7cbcff;
+}
+
 /* fallback font — approximates the proprietary "888" family with Arial */
 @font-face {
   font-family: "888-fallback";
@@ -322,4 +336,25 @@ main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
   padding: 40px 0;
+}
+
+/* Dark-mode fixes for blocks that use literal light colors instead of tokens,
+   so their surfaces follow the theme (the header bar stays black in both).
+   Placed at end of file to satisfy no-descending-specificity. */
+:root.dark .author-header {
+  background-color: var(--light-color);
+}
+
+:root.dark .author-header .author-header-bio {
+  color: var(--text-color);
+}
+
+:root.dark .article-list .article-list-card-title,
+:root.dark .article-list .article-list-card-title a {
+  color: var(--heading-color);
+}
+
+:root.dark .toc {
+  border-color: var(--light-color);
+  background-color: var(--light-color);
 }

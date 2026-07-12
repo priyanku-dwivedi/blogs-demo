@@ -224,6 +224,35 @@ function decorateArticleLayout(main) {
   if (breadcrumb) bodySection.prepend(breadcrumb);
 }
 
+const THEME_STORAGE_KEY = 'color-theme';
+
+/**
+ * Returns the currently stored color theme ('dark' or 'light'), defaulting to
+ * light when nothing is stored.
+ */
+export function getStoredTheme() {
+  try {
+    return localStorage.getItem(THEME_STORAGE_KEY) === 'dark' ? 'dark' : 'light';
+  } catch (e) {
+    return 'light';
+  }
+}
+
+/**
+ * Applies a color theme by toggling the `dark` class on <html> and persisting
+ * the choice, matching the source's dark/light mode toggle.
+ * @param {string} theme 'dark' or 'light'
+ */
+export function setTheme(theme) {
+  const dark = theme === 'dark';
+  document.documentElement.classList.toggle('dark', dark);
+  try {
+    localStorage.setItem(THEME_STORAGE_KEY, dark ? 'dark' : 'light');
+  } catch (e) {
+    // storage unavailable — theme still applies for this page view
+  }
+}
+
 /**
  * Decorates the main element.
  * @param {Element} main The main element
@@ -243,6 +272,7 @@ export function decorateMain(main) {
  */
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
+  setTheme(getStoredTheme());
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {

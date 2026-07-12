@@ -1,5 +1,29 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
+import { getStoredTheme, setTheme } from '../../scripts/scripts.js';
+
+/**
+ * Builds the dark/light color-theme toggle shown in the nav, matching the
+ * source header switch. Reflects and persists the current theme.
+ */
+function buildThemeToggle() {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'nav-theme-toggle';
+  const apply = (theme) => {
+    const dark = theme === 'dark';
+    button.setAttribute('aria-pressed', dark ? 'true' : 'false');
+    button.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+    button.title = dark ? 'Light mode' : 'Dark mode';
+  };
+  apply(getStoredTheme());
+  button.addEventListener('click', () => {
+    const next = getStoredTheme() === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+    apply(next);
+  });
+  return button;
+}
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
@@ -135,6 +159,12 @@ export default async function decorate(block) {
   if (brandLink) {
     brandLink.className = '';
     brandLink.closest('.button-container').className = '';
+  }
+
+  // Dark/light color-theme toggle in the tools area (matches the source).
+  const navTools = nav.querySelector('.nav-tools');
+  if (navTools) {
+    navTools.prepend(buildThemeToggle());
   }
 
   const navSections = nav.querySelector('.nav-sections');
