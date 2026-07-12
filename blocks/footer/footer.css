@@ -27,7 +27,7 @@ footer .footer a:hover {
 }
 
 /* 1. social row */
-footer .footer > div > div:first-child {
+footer .footer > div > div:first-child .default-content-wrapper {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -49,7 +49,7 @@ footer .footer > div > div:first-child a {
 }
 
 /* 2. link columns */
-footer .footer > div > div:nth-child(2) {
+footer .footer > div > div:nth-child(2) .default-content-wrapper {
   display: grid;
   grid-template-columns: 1fr;
   gap: 24px;
@@ -65,11 +65,24 @@ footer .footer > div > div:nth-child(2) li {
   padding: 4px 0;
 }
 
-/* 3. CTA + award logos */
+/* 3. CTA + award logos — Get Started centered on its own line,
+   award logos centered in a wrapping row beneath it (matches source). */
+footer .footer > div > div:nth-child(3) .default-content-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+footer .footer > div > div:nth-child(3) .default-content-wrapper p {
+  margin: 0;
+}
+
 footer .footer > div > div:nth-child(3) img {
   height: 40px;
   width: auto;
-  margin: 8px 12px 8px 0;
+  margin: 0;
   vertical-align: middle;
 }
 
@@ -98,7 +111,7 @@ footer .footer > div > div:nth-child(4) .default-content-wrapper {
   gap: 8px;
 }
 
-footer .footer > div > div:nth-child(4) p {
+footer .footer > div > div:nth-child(4) .default-content-wrapper p {
   margin: 0;
 }
 
@@ -137,7 +150,14 @@ footer .footer > div > div:last-child p:first-child {
     padding: 32px;
   }
 
-  footer .footer > div > div:nth-child(2) {
+  footer .footer > div > div:nth-child(2) .default-content-wrapper {
     grid-template-columns: repeat(5, 1fr);
   }
+}
+
+/* Region 3 CTA: force "Get Started" onto its own centered full-width line.
+   Placed last so its higher specificity does not precede plainer p rules. */
+footer .footer > div > div:nth-child(3) .default-content-wrapper p:has(a[href*="download-poker"]) {
+  flex-basis: 100%;
+  text-align: center;
 }
