@@ -26,4 +26,36 @@ export default function decorate(block) {
   if (imageRow && imageRow.querySelector('picture')) {
     imageRow.classList.add('article-hero-has-image');
   }
+
+  // Byline: the authored cell holds an avatar, the author name, and a link
+  // whose text is the raw author-page URL. Rebuild it as an avatar + a single
+  // "By {name}" link pointing at the author page (matching the source).
+  const authorRow = block.querySelector('.article-hero-author');
+  if (authorRow) {
+    const cell = authorRow.firstElementChild || authorRow;
+    const avatar = cell.querySelector('picture, img');
+    const link = cell.querySelector('a');
+    const paras = [...cell.querySelectorAll('p')];
+    // author name = first <p> that is not just the avatar and not the URL link
+    const nameP = paras.find((p) => {
+      const t = p.textContent.trim();
+      return t && !p.querySelector('picture, img') && !/^https?:|^\//.test(t);
+    });
+    const name = nameP ? nameP.textContent.trim() : '';
+    const href = link ? link.getAttribute('href') : '';
+    cell.replaceChildren();
+    if (avatar) {
+      const av = document.createElement('span');
+      av.className = 'article-hero-author-avatar';
+      av.append(avatar.tagName === 'IMG' ? avatar.closest('picture') || avatar : avatar);
+      cell.append(av);
+    }
+    if (name) {
+      const byline = href ? document.createElement('a') : document.createElement('span');
+      byline.className = 'article-hero-author-name';
+      if (href) byline.href = href;
+      byline.textContent = `By ${name}`;
+      cell.append(byline);
+    }
+  }
 }

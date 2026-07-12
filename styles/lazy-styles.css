@@ -1,1 +1,88 @@
 /* add global styles that can be loaded post LCP here */
+
+/* Article page two-column layout: article (hero + body) on the left, sticky
+   Table of Contents sidebar on the right, with a breadcrumb above (matching
+   the 888poker source article design). Built by decorateArticleLayout() in
+   scripts.js on pages with an article-hero and a toc block. The .article-grid
+   replaces the section's normal wrapper, so it also carries the standard
+   section max-width and padding. */
+main.article-page .article-body-section .article-breadcrumb,
+main.article-page .article-body-section .article-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+main.article-page .article-body-section .article-breadcrumb {
+  margin-bottom: 16px;
+}
+
+main.article-page .article-breadcrumb ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  font-size: 13px;
+  color: var(--dark-color, #505050);
+}
+
+main.article-page .article-breadcrumb li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+main.article-page .article-breadcrumb li:not(:last-child)::after {
+  content: "\203A";
+  color: var(--dark-color, #505050);
+}
+
+main.article-page .article-breadcrumb a {
+  color: var(--link-color, #035fe6);
+  text-decoration: none;
+}
+
+main.article-page .article-breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+main.article-page .article-breadcrumb li[aria-current="page"] {
+  color: var(--dark-color, #505050);
+}
+
+/* Hero pulled into the left column sits flush at the top with no extra padding
+   (the grid already provides the outer gutter). */
+main.article-page .article-content .article-hero {
+  padding: 0;
+}
+
+main.article-page .article-content {
+  min-width: 0;
+}
+
+main.article-page .article-sidebar {
+  margin-top: 24px;
+}
+
+@media (width >= 900px) {
+  main.article-page .article-body-section .article-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 40px;
+    align-items: start;
+    padding: 0 32px;
+  }
+
+  main.article-page .article-body-section .article-breadcrumb {
+    padding: 0 32px;
+  }
+
+  main.article-page .article-sidebar {
+    margin-top: 0;
+    position: sticky;
+    top: 24px;
+  }
+}
