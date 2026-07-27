@@ -199,5 +199,8 @@ export default function decorate(block) {
 
   block.replaceChildren(ul);
 
+  const section = block.closest('.section');
+  if (section) section.classList.add('has-two-col');
+
   enrichCards(ul);
 }

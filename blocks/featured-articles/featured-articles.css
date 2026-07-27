@@ -190,4 +190,21 @@
   .featured-articles .featured-articles-grid > li:first-child .featured-articles-card-title {
     font-size: 28px;
   }
+
+  /* Section two-column layout: category-nav + article-list left column, right is empty. */
+  .section.has-two-col {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    column-gap: 24px;
+  }
+
+  .section.has-two-col .default-content-wrapper,
+  .section.has-two-col .featured-articles-wrapper {
+    grid-column: 1 / -1;
+  }
+
+  .section.has-two-col .category-nav-wrapper,
+  .section.has-two-col .article-list-wrapper {
+    grid-column: 1;
+  }
 }
