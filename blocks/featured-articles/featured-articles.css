@@ -203,6 +203,9 @@
     display: grid;
     grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
     column-gap: 24px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0;
   }
 
   .section.has-two-col .default-content-wrapper,
@@ -225,15 +228,15 @@
     color: #1c1c1c;
   }
 
-  /* Top wrapper: gap above + top rounded corners + horizontal inset */
+  /* Top wrapper: gap above + top rounded corners */
   .section.has-two-col .category-nav-wrapper {
-    margin: 25px 15px 0;
+    margin: 25px 0 0;
     border-radius: 7px 7px 0 0;
   }
 
-  /* Bottom wrapper: bottom rounded corners + horizontal inset */
+  /* Bottom wrapper: bottom rounded corners */
   .section.has-two-col .article-list-wrapper {
-    margin: 0 15px;
+    margin: 0;
     border-radius: 0 0 7px 7px;
   }
 }
