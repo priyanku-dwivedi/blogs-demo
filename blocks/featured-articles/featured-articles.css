@@ -203,7 +203,7 @@
   /* The section becomes a 2-column grid: main content left, sidebar right.   */
   .section.has-featured-sidebar {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
     column-gap: 24px;
   }
 
