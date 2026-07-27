@@ -61,10 +61,13 @@ main.article-page .article-content .article-hero {
 
 main.article-page .article-content {
   min-width: 0;
+  background-color: #fff;
+  border-radius: 7px;
+  padding: 15px;
 }
 
 main.article-page .article-sidebar {
-  margin-top: 24px;
+  margin-top: 0;
 }
 
 @media (width >= 900px) {

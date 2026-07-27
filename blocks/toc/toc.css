@@ -1,14 +1,14 @@
 .toc {
-  border: 1px solid var(--light-color, #eaeaea);
   border-radius: 8px;
-  padding: 16px 20px;
-  margin: 24px 0;
-  background-color: var(--light-color, #fafafa);
+  padding: 20px 24px;
+  background-color: #fff;
 }
 
 .toc .toc-title {
-  margin: 0 0 8px;
-  font-size: var(--heading-font-size-s, 20px);
+  margin: 0 0 12px;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-color, #1c1c1c);
 }
 
 .toc .toc-list {
@@ -18,7 +18,18 @@
 }
 
 .toc .toc-list li {
-  margin: 4px 0;
+  margin: 6px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.toc .toc-list li::before {
+  content: "\2022";
+  color: var(--link-color, #035fe6);
+  font-size: 18px;
+  line-height: 1.4;
+  flex-shrink: 0;
 }
 
 .toc .toc-list .toc-item-sub {

@@ -30,6 +30,16 @@ export default function decorate(block) {
   // Byline: the authored cell holds an avatar, the author name, and a link
   // whose text is the raw author-page URL. Rebuild it as an avatar + a single
   // "By {name}" link pointing at the author page (matching the source).
+  // Wrap title + meta together into a hero card (side-by-side at desktop)
+  const titleRow = block.querySelector('.article-hero-title');
+  const metaRow = block.querySelector('.article-hero-meta');
+  if (titleRow && metaRow) {
+    const card = document.createElement('div');
+    card.className = 'article-hero-card';
+    block.insertBefore(card, titleRow);
+    card.append(titleRow, metaRow);
+  }
+
   const authorRow = block.querySelector('.article-hero-author');
   if (authorRow) {
     const cell = authorRow.firstElementChild || authorRow;
