@@ -190,4 +190,9 @@
   .featured-articles .featured-articles-grid > li:first-child .featured-articles-card-title {
     font-size: 28px;
   }
+
+  /* Only show the first 3 cards (1 lead + 2 side); hide any extras beyond the design */
+  .featured-articles .featured-articles-grid > li:nth-child(n + 4) {
+    display: none;
+  }
 }
