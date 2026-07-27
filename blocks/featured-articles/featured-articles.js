@@ -198,5 +198,23 @@ export default function decorate(block) {
   });
 
   block.replaceChildren(ul);
+
+  // Move cards 4+ out of the main grid into a sidebar in the section
+  const allItems = [...ul.querySelectorAll(':scope > li')];
+  if (allItems.length > 3) {
+    const sidebarUl = document.createElement('ul');
+    sidebarUl.className = 'featured-articles-sidebar-grid';
+    allItems.slice(3).forEach((item) => sidebarUl.appendChild(item));
+    const sidebarDiv = document.createElement('div');
+    sidebarDiv.className = 'featured-articles-sidebar featured-articles';
+    sidebarDiv.appendChild(sidebarUl);
+    const section = block.closest('.section');
+    if (section) {
+      section.appendChild(sidebarDiv);
+      section.classList.add('has-featured-sidebar');
+    }
+    enrichCards(sidebarUl);
+  }
+
   enrichCards(ul);
 }
