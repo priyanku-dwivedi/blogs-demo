@@ -221,8 +221,19 @@
   .section.has-two-col .article-list-wrapper {
     grid-column: 1;
     max-width: 100%;
-    margin: 0;
     background-color: #fff;
     color: #1c1c1c;
+  }
+
+  /* Top wrapper: gap above + top rounded corners */
+  .section.has-two-col .category-nav-wrapper {
+    margin: 25px 0 0;
+    border-radius: 7px 7px 0 0;
+  }
+
+  /* Bottom wrapper: bottom rounded corners + bottom padding */
+  .section.has-two-col .article-list-wrapper {
+    margin: 0;
+    border-radius: 0 0 7px 7px;
   }
 }
