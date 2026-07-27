@@ -192,6 +192,13 @@
   }
 
   /* Section two-column layout: category-nav + article-list left column, right is empty. */
+
+  /* Override section-level white background; only the left-column wrappers stay white */
+  .section.has-two-col.article-list-section,
+  .section.has-two-col.category-nav-section {
+    background-color: transparent;
+  }
+
   .section.has-two-col {
     display: grid;
     grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
@@ -209,5 +216,7 @@
     grid-column: 1;
     max-width: 100%;
     margin: 0;
+    background-color: #fff;
+    color: #1c1c1c;
   }
 }

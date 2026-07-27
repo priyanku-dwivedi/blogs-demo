@@ -83,7 +83,9 @@
 body {
   display: none;
   margin: 0;
-  background-color: var(--background-color);
+  background-color: var(--page-background-color);
+  background-image: url('/images/background-pattern.webp');
+  background-repeat: repeat;
   color: var(--text-color);
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
