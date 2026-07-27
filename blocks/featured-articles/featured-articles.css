@@ -203,8 +203,11 @@
     grid-column: 1 / -1;
   }
 
+  /* Override global max-width/margin so wrapper fills exactly the grid track */
   .section.has-two-col .category-nav-wrapper,
   .section.has-two-col .article-list-wrapper {
     grid-column: 1;
+    max-width: 100%;
+    margin: 0;
   }
 }
