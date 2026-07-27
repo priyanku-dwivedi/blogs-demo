@@ -161,20 +161,15 @@
   font-weight: 400;
 }
 
-/* Sidebar container: reset block margin */
-.featured-articles-sidebar.featured-articles {
-  margin: 0;
-}
-
 @media (width >= 900px) {
   .featured-articles .featured-articles-grid {
     grid-template-columns: 2fr 1fr;
     gap: 16px;
   }
 
-  /* Lead card: left column, spans both rows */
+  /* Lead card: left column, spans all side-card rows */
   .featured-articles .featured-articles-grid > li:first-child {
-    grid-row: span 2;
+    grid-row: span 3;
   }
 
   /* Lead card image fills full height of the 2-row span */
@@ -194,54 +189,5 @@
   /* Lead card: larger title */
   .featured-articles .featured-articles-grid > li:first-child .featured-articles-card-title {
     font-size: 28px;
-  }
-
-  /* ── Section two-column layout ──────────────────────────────────────────── */
-
-  /* When the 4th card exists, it is moved to .featured-articles-sidebar.     */
-
-  /* The section becomes a 2-column grid: main content left, sidebar right.   */
-  .section.has-featured-sidebar {
-    display: grid;
-    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
-    column-gap: 24px;
-  }
-
-  /* Full-width rows: skip link wrapper + featured-articles hero */
-  .section.has-featured-sidebar .default-content-wrapper {
-    grid-column: 1 / -1;
-    grid-row: 1;
-  }
-
-  .section.has-featured-sidebar .featured-articles-wrapper {
-    grid-column: 1 / -1;
-    grid-row: 2;
-  }
-
-  /* Left column: category nav and article list */
-  .section.has-featured-sidebar .category-nav-wrapper {
-    grid-column: 1;
-    grid-row: 3;
-  }
-
-  .section.has-featured-sidebar .article-list-wrapper {
-    grid-column: 1;
-    grid-row: 4;
-  }
-
-  /* Right column: sidebar with extra featured articles, spans rows 3–4 */
-  .section.has-featured-sidebar .featured-articles-sidebar {
-    grid-column: 2;
-    grid-row: 3 / 5;
-    align-self: start;
-  }
-
-  .featured-articles-sidebar .featured-articles-sidebar-grid {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
   }
 }
