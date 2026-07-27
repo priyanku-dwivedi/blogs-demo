@@ -163,7 +163,31 @@
 
 @media (width >= 900px) {
   .featured-articles .featured-articles-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
+    grid-template-columns: 2fr 1fr;
+    gap: 16px;
+  }
+
+  /* Lead card: left column, spans both rows */
+  .featured-articles .featured-articles-grid > li:first-child {
+    grid-row: span 2;
+  }
+
+  /* Lead card image fills full height of the 2-row span */
+  .featured-articles .featured-articles-grid > li:first-child .featured-articles-card-image {
+    height: 100%;
+  }
+
+  .featured-articles .featured-articles-grid > li:first-child .featured-articles-card-image a {
+    height: 100%;
+  }
+
+  .featured-articles .featured-articles-grid > li:first-child .featured-articles-card-image img {
+    aspect-ratio: unset;
+    height: 100%;
+  }
+
+  /* Lead card: larger title */
+  .featured-articles .featured-articles-grid > li:first-child .featured-articles-card-title {
+    font-size: 28px;
   }
 }
