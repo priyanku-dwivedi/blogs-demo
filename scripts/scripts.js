@@ -232,9 +232,9 @@ const THEME_STORAGE_KEY = 'color-theme';
  */
 export function getStoredTheme() {
   try {
-    return localStorage.getItem(THEME_STORAGE_KEY) === 'dark' ? 'dark' : 'light';
+    return localStorage.getItem(THEME_STORAGE_KEY) !== 'light' ? 'dark' : 'light';
   } catch (e) {
-    return 'light';
+    return 'dark';
   }
 }
 

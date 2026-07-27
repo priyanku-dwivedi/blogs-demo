@@ -13,9 +13,18 @@
 export default function decorate(block) {
   const links = [...block.querySelectorAll('a[href]')];
 
+  // Mark the containing section for light-background styling
+  const section = block.closest('.section');
+  if (section) section.classList.add('category-nav-section');
+
   const nav = document.createElement('nav');
   nav.className = 'category-nav-tabs';
   nav.setAttribute('aria-label', 'Poker Categories');
+
+  // Heading "Poker Categories" (matches source design)
+  const heading = document.createElement('h2');
+  heading.className = 'category-nav-heading';
+  heading.textContent = 'Poker Categories';
 
   const list = document.createElement('ul');
   list.className = 'category-nav-list';
@@ -42,5 +51,5 @@ export default function decorate(block) {
   });
 
   nav.append(list);
-  block.replaceChildren(nav);
+  block.replaceChildren(heading, nav);
 }

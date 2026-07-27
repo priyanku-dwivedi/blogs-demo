@@ -90,6 +90,26 @@ body {
   line-height: 1.6;
 }
 
+/* Visually hide skip-to-main-content link, show on keyboard focus */
+a[href="#main-content"] {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+a[href="#main-content"]:focus {
+  left: 0;
+  width: auto;
+  height: auto;
+  z-index: 9999;
+  padding: 8px 16px;
+  background-color: var(--background-color);
+  color: var(--link-color);
+  text-decoration: underline;
+}
+
 body.appear {
   display: block;
 }

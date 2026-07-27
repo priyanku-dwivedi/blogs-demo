@@ -74,6 +74,18 @@ function normalize(value) {
   return (value || '').toString().trim().toLowerCase();
 }
 
+function titleFromPath(path) {
+  const segment = (path || '').split('/').filter(Boolean).pop() || '';
+  return segment.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+function isArticle(entry) {
+  const { path, author } = entry;
+  if (!author) return false;
+  if (!path || /\/author\/|\/tags\//.test(path)) return false;
+  return true;
+}
+
 async function fetchIndex() {
   try {
     const resp = await fetch(QUERY_INDEX);
@@ -113,7 +125,7 @@ function matchesFilters(entry, config) {
 }
 
 function formatDate(entry) {
-  const raw = entry.publishDate || entry.date || entry.lastModified;
+  const raw = entry.publishedDate || entry.publishDate || entry.date || entry.lastModified;
   if (!raw) return '';
   const ts = Number(raw);
   let dateInput = raw;
@@ -122,65 +134,167 @@ function formatDate(entry) {
   }
   const d = new Date(dateInput);
   if (Number.isNaN(d.getTime())) return raw;
-  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).replace(',', '');
+}
+
+const CALENDAR_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM5 8V6h14v2H5zm2 4h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2z"/></svg>';
+
+function formatRelativeTime(entry) {
+  const raw = entry.publishedDate || entry.publishDate || entry.date || entry.lastModified;
+  if (!raw) return '';
+  const ts = Number(raw);
+  let time;
+  if (!Number.isNaN(ts)) {
+    time = ts > 1e12 ? ts : ts * 1000;
+  } else {
+    time = Date.parse(raw);
+  }
+  if (!time || Number.isNaN(time)) return '';
+  const days = Math.floor((Date.now() - time) / 86400000);
+  if (days === 0) return 'Last update: today';
+  if (days === 1) return 'Last update: yesterday';
+  if (days < 7) return `Last update: ${days} days ago`;
+  const weeks = Math.floor(days / 7);
+  const rem = days % 7;
+  if (rem === 0) return `Last update: ${weeks} week${weeks > 1 ? 's' : ''} ago`;
+  return `Last update: ${weeks} week${weeks > 1 ? 's' : ''} ${rem} day${rem > 1 ? 's' : ''} ago`;
+}
+
+const authorListCache = new Map();
+
+async function fetchAuthorImageForList(authorPage) {
+  if (authorListCache.has(authorPage)) return authorListCache.get(authorPage);
+  authorListCache.set(authorPage, null);
+  try {
+    const resp = await fetch(`${authorPage}.plain.html`);
+    if (!resp.ok) return null;
+    const html = await resp.text();
+    const match = html.match(/class="author-header"[\s\S]*?<img[^>]+src="([^"]+)"/);
+    if (!match) return null;
+    const rawSrc = match[1].replace(/&#x26;/g, '&').replace(/&amp;/g, '&');
+    const imgUrl = new URL(rawSrc, `${window.location.origin}${authorPage}`).href;
+    authorListCache.set(authorPage, imgUrl);
+    return imgUrl;
+  } catch (e) {
+    return null;
+  }
+}
+
+async function enrichListAvatars(list) {
+  const cards = [...list.querySelectorAll('.article-list-card')];
+  // Collect unique author pages
+  const authorPages = new Set();
+  cards.forEach((card) => {
+    const ap = card.dataset.authorPage;
+    if (ap) authorPages.add(ap);
+  });
+  // Fetch all in parallel
+  const imgMap = new Map();
+  await Promise.all(Array.from(authorPages).map(async (ap) => {
+    const url = await fetchAuthorImageForList(ap);
+    if (url) imgMap.set(ap, url);
+  }));
+  // Apply to avatars
+  cards.forEach((card) => {
+    const ap = card.dataset.authorPage;
+    if (!ap || !imgMap.has(ap)) return;
+    const avatarEl = card.querySelector('.article-list-card-avatar');
+    if (!avatarEl) return;
+    const img = document.createElement('img');
+    img.src = imgMap.get(ap);
+    img.alt = avatarEl.textContent.trim();
+    avatarEl.textContent = '';
+    avatarEl.append(img);
+    avatarEl.classList.add('article-list-card-avatar-photo');
+  });
+}
+
+function makeListAvatar(name) {
+  const parts = (name || '').trim().split(/\s+/);
+  const initials = parts.length >= 2
+    ? (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
+    : (parts[0] || '').substring(0, 2).toUpperCase();
+  const el = document.createElement('span');
+  el.className = 'article-list-card-avatar';
+  el.textContent = initials;
+  el.setAttribute('aria-hidden', 'true');
+  return el;
 }
 
 function buildCard(entry) {
   const li = document.createElement('li');
   li.className = 'article-list-card';
   const href = entry.path || entry.link || '#';
+  if (entry.authorPage) li.dataset.authorPage = entry.authorPage;
 
   if (entry.image) {
     const imageWrap = document.createElement('div');
     imageWrap.className = 'article-list-card-image';
-    const a = document.createElement('a');
-    a.href = href;
-    a.append(createOptimizedPicture(entry.image, entry.title || '', false, [{ width: '750' }]));
-    imageWrap.append(a);
+    const imageLink = document.createElement('a');
+    imageLink.href = href;
+    imageLink.append(createOptimizedPicture(entry.image, entry.title || '', false, [{ width: '750' }]));
+    imageWrap.append(imageLink);
     li.append(imageWrap);
   }
 
   const body = document.createElement('div');
   body.className = 'article-list-card-body';
 
-  if (entry.category) {
-    const cat = document.createElement('div');
-    cat.className = 'article-list-card-category';
-    cat.textContent = entry.category;
-    body.append(cat);
+  // Date header: calendar icon + publish date + relative "Last update" time
+  const date = formatDate(entry);
+  if (date) {
+    const dateHeader = document.createElement('div');
+    dateHeader.className = 'article-list-card-date-header';
+    const calIcon = document.createElement('span');
+    calIcon.className = 'article-list-card-calendar-icon';
+    calIcon.innerHTML = CALENDAR_SVG;
+    const dateEl = document.createElement('time');
+    dateEl.className = 'article-list-card-date';
+    dateEl.textContent = date;
+    const relTime = document.createElement('span');
+    relTime.className = 'article-list-card-reltime';
+    relTime.textContent = formatRelativeTime(entry);
+    dateHeader.append(calIcon, dateEl, relTime);
+    body.append(dateHeader);
   }
 
   const title = document.createElement('h3');
   title.className = 'article-list-card-title';
   const titleLink = document.createElement('a');
   titleLink.href = href;
-  titleLink.textContent = entry.title || '';
+  titleLink.textContent = entry.title || titleFromPath(href);
   title.append(titleLink);
   body.append(title);
 
-  const date = formatDate(entry);
-  if (date) {
-    const dateEl = document.createElement('div');
-    dateEl.className = 'article-list-card-date';
-    const time = document.createElement('time');
-    time.textContent = date;
-    dateEl.append(time);
-    body.append(dateEl);
+  if (entry.description) {
+    const desc = document.createElement('p');
+    desc.className = 'article-list-card-description';
+    desc.textContent = entry.description;
+    body.append(desc);
   }
 
-  if (entry.description) {
-    const excerpt = document.createElement('p');
-    excerpt.className = 'article-list-card-excerpt';
-    excerpt.textContent = entry.description;
-    body.append(excerpt);
+  // Footer: author (left) + CTA button (right)
+  const footer = document.createElement('div');
+  footer.className = 'article-list-card-footer';
+
+  if (entry.author) {
+    const authorRow = document.createElement('div');
+    authorRow.className = 'article-list-card-author-row';
+    authorRow.append(makeListAvatar(entry.author));
+    const authorEl = document.createElement('span');
+    authorEl.className = 'article-list-card-author';
+    authorEl.textContent = `By ${entry.author}`;
+    authorRow.append(authorEl);
+    footer.append(authorRow);
   }
 
   const cta = document.createElement('a');
   cta.className = 'article-list-card-cta';
   cta.href = href;
-  cta.textContent = 'Read full article';
-  body.append(cta);
+  cta.textContent = 'Read full article ▶';
+  footer.append(cta);
 
+  body.append(footer);
   li.append(body);
   return li;
 }
@@ -189,6 +303,10 @@ export default async function decorate(block) {
   block.classList.add('article-list');
   const config = readConfig(block);
   block.replaceChildren();
+
+  // Mark the containing section for light-background styling
+  const section = block.closest('.section');
+  if (section) section.classList.add('article-list-section');
 
   if (config.heading) {
     const h = document.createElement('h2');
@@ -202,7 +320,7 @@ export default async function decorate(block) {
   block.append(list);
 
   const tsOf = (e) => {
-    const raw = e.publishDate || e.date || e.lastModified;
+    const raw = e.publishedDate || e.publishDate || e.date || e.lastModified;
     if (!raw) return 0;
     const n = Number(raw);
     if (!Number.isNaN(n)) return n > 1e12 ? n : n * 1000;
@@ -210,7 +328,7 @@ export default async function decorate(block) {
     return Number.isNaN(t) ? 0 : t;
   };
   const entries = (await fetchIndex())
-    .filter((e) => matchesFilters(e, config))
+    .filter((e) => isArticle(e) && matchesFilters(e, config))
     .sort((a, b) => tsOf(b) - tsOf(a));
 
   let shown = 0;
@@ -221,6 +339,7 @@ export default async function decorate(block) {
   };
 
   renderPage();
+  enrichListAvatars(list);
 
   if (entries.length > shown) {
     const wrapper = document.createElement('div');

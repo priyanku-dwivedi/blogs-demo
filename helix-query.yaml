@@ -38,6 +38,9 @@ indices:
       description:
         select: head > meta[name="description"]
         value: attribute(el, "content")
+      title:
+        select: head > meta[property="og:title"]
+        value: attribute(el, "content")
       tags:
         select: head > meta[name="article-tag"]
         value: attribute(el, "content")

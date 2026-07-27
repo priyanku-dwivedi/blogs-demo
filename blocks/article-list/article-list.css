@@ -1,62 +1,95 @@
+/* Section background: article-list sections use a light background */
+.article-list-section,
+.category-nav-section {
+  background-color: #fff;
+  color: #1c1c1c;
+}
+
 .article-list {
-  margin: 24px 0;
+  margin: 0;
+  padding: 24px 0;
 }
 
 .article-list .article-list-heading {
-  margin: 0 0 20px;
-  font-size: 21px;
-  font-weight: 400;
-  color: var(--heading-color, #1c1c1c);
+  margin: 0 0 24px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #1c1c1c;
 }
 
 .article-list .article-list-grid {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 35px 30px;
-}
-
-.article-list .article-list-card {
   display: flex;
   flex-direction: column;
-  background-color: transparent;
+  gap: 0;
 }
 
+/* Card: horizontal layout — image left, content right */
+.article-list .article-list-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 24px 0;
+  background: none;
+  overflow: visible;
+  border-radius: 0;
+  aspect-ratio: unset;
+}
+
+/* Remove overlay gradient — no longer needed */
+.article-list .article-list-card::after {
+  display: none;
+}
+
+@media (width >= 600px) {
+  .article-list .article-list-card {
+    grid-template-columns: 2fr 3fr;
+    gap: 24px;
+  }
+}
+
+/* Image: normal flow, left side */
 .article-list .article-list-card-image {
+  position: static;
+  overflow: hidden;
+  border-radius: 8px;
   line-height: 0;
+}
+
+.article-list .article-list-card-image picture,
+.article-list .article-list-card-image a {
+  display: block;
+  height: auto;
 }
 
 .article-list .article-list-card-image img {
   width: 100%;
-  aspect-ratio: 375 / 178;
+  height: auto;
   object-fit: cover;
-  border-radius: 10px;
+  aspect-ratio: 4 / 3;
+  border-radius: 8px;
 }
 
+/* Body: right column */
 .article-list .article-list-card-body {
+  position: static;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  flex: 1;
-  padding: 0;
 }
 
-.article-list .article-list-card-category {
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--text-color, #505050);
-}
+
 
 .article-list .article-list-card-title {
-  margin: 14px 0 0;
-  font-size: 17px;
-  font-weight: 400;
-  line-height: 1.18;
-  color: var(--heading-color, #000);
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #1c1c1c;
 }
 
 .article-list .article-list-card-title a {
@@ -68,33 +101,123 @@
   text-decoration: underline;
 }
 
-.article-list .article-list-card-date {
-  font-size: 12px;
-  color: #007cf7;
-}
-
-.article-list .article-list-card-excerpt {
+.article-list .article-list-card-description {
   margin: 0;
-  font-size: 16px;
-  line-height: 1.15;
-  color: var(--text-color, #000);
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-.article-list .article-list-card-cta {
+/* Date header: calendar icon + publish date + relative time */
+.article-list .article-list-card-date-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.article-list .article-list-card-calendar-icon {
+  color: #3b63fb;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.article-list .article-list-card-calendar-icon svg {
+  display: block;
+}
+
+.article-list .article-list-card-date {
+  color: #3b63fb;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.article-list .article-list-card-reltime {
+  color: #888;
+  font-size: 12px;
+  margin-left: auto;
+}
+
+/* Footer: author row (left) + CTA button (right) */
+.article-list .article-list-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   margin-top: auto;
-  align-self: stretch;
-  text-align: left;
-  padding: 9px 14px;
-  background-color: #007cf7;
+  padding-top: 12px;
+  flex-wrap: wrap;
+}
+
+.article-list .article-list-card-author-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* Avatar circle (initials fallback) */
+.article-list .article-list-card-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #555;
   color: #fff;
-  font-size: 15px;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  text-transform: uppercase;
+}
+
+.article-list .article-list-card-avatar-photo {
+  background-color: transparent;
+}
+
+.article-list .article-list-card-avatar-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.article-list .article-list-card-author {
+  color: #444;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+/* CTA read more button — compact, right-aligned */
+.article-list .article-list-card-cta {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 10px 18px;
+  background-color: #3b63fb;
+  color: #fff;
+  border-radius: 4px;
   text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  white-space: nowrap;
 }
 
 .article-list .article-list-card-cta:hover {
-  background-color: #0067cf;
+  background-color: #2952e3;
+  color: #fff;
 }
 
+/* Load more button */
 .article-list .article-list-loadmore {
   display: flex;
   justify-content: center;
@@ -104,29 +227,21 @@
 .article-list .article-list-loadmore-button {
   cursor: pointer;
   padding: 12px 32px;
-  border: 1px solid #007cf7;
+  border: 2px solid #3b63fb;
   border-radius: 4px;
-  background-color: #007cf7;
-  color: #fff;
+  background-color: transparent;
+  color: #3b63fb;
   font-weight: 700;
+  font-size: 14px;
 }
 
 .article-list .article-list-loadmore-button:hover {
-  background-color: #0067cf;
+  background-color: #3b63fb;
+  color: #fff;
 }
 
 .article-list .article-list-empty {
-  color: var(--text-color, #505050);
+  color: #555;
+  font-style: italic;
 }
 
-@media (width >= 600px) {
-  .article-list .article-list-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (width >= 900px) {
-  .article-list .article-list-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
