@@ -110,13 +110,20 @@
 
 .cards.ged-story .cards-card-body h3 {
   font-family: "Roboto Slab", georgia, serif;
+  font-size: 24px;
+  font-weight: 700;
   color: var(--ged-text);
   margin: 0 0 8px;
 }
 
+.cards.ged-story .cards-card-body p {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
 .cards.ged-story .cards-card-body a {
   color: var(--ged-brand);
-  font-weight: 600;
+  font-weight: 400;
   text-decoration: none;
 }
 

@@ -96,34 +96,44 @@
   text-decoration: none;
 }
 
-/* GED CTA band: centered heading + button on a light/teal surface */
+/* GED CTA band: centered heading + button on a solid teal surface (matches the
+   source's full-width teal "Join the millions…" band). */
 .hero.ged-cta {
   min-height: 0;
-  padding: 56px 24px;
+  padding: 80px 24px;
   text-align: center;
-  background-color: #f4f8fa;
+  background-color: var(--ged-brand);
 }
 
 .hero.ged-cta h1,
 .hero.ged-cta h2 {
   font-family: "Roboto Slab", georgia, serif;
-  color: var(--ged-brand);
+  color: #f9f9fc;
+  font-size: clamp(26px, 2.6vw, 34px);
   font-weight: 400;
   max-width: 820px;
   margin: 0 auto 20px;
 }
 
+/* white button on the teal band */
 .hero.ged-cta .button,
 .hero.ged-cta a.button,
 .hero.ged-cta p > a:only-child {
   display: inline-block;
   padding: 14px 32px;
-  background-color: var(--ged-brand);
-  color: #fff;
+  background-color: #fff;
+  color: var(--ged-brand);
   font-weight: 600;
-  font-size: 18px;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
   border-radius: 4px;
   text-decoration: none;
+}
+
+.hero.ged-cta p > a:only-child:hover {
+  background-color: #f0f6f8;
+  color: var(--ged-brand);
 }
 
 /* GED graduate-story hero: round portrait + name + quote (light surface) */

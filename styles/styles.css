@@ -383,3 +383,40 @@ body.ged-poc main h1 {
   font-weight: 600;
   text-transform: none;
 }
+
+/* GED default-content feature sections (e.g. "Internationally recognized"):
+   the source renders these H2s in large teal Roboto Slab, weight 400, and the
+   trailing standalone link as a solid teal button. */
+body.ged-poc main .default-content-wrapper h2 {
+  color: #0084a9;
+  font-size: clamp(30px, 3.4vw, 50px);
+  font-weight: 400;
+  line-height: 1.15;
+  margin: 8px 0 16px;
+}
+
+body.ged-poc main .default-content-wrapper p {
+  font-size: 18px;
+  line-height: 1.6;
+  max-width: 900px;
+}
+
+/* standalone link in a default-content paragraph -> teal button */
+body.ged-poc main .default-content-wrapper p > a:only-child {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 13px 26px;
+  background-color: #0084a9;
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+body.ged-poc main .default-content-wrapper p > a:only-child:hover {
+  background-color: #006c8a;
+  color: #fff;
+}
