@@ -347,6 +347,29 @@ body.ged-poc header nav a:any-link {
   font-family: Roboto, system-ui, arial, sans-serif;
 }
 
+/* GED logo. The published content link can lose its <img> on publish, so the
+   brand link carries the GED logo as a CSS background as a reliable fallback;
+   when a real <img> IS present it renders on top and the background is hidden. */
+body.ged-poc header nav .nav-brand a:any-link {
+  display: inline-block;
+  height: 48px;
+}
+
+/* fallback logo only when the content link has no <img> */
+/* stylelint-disable-next-line no-descending-specificity */
+body.ged-poc header nav .nav-brand a:not(:has(img)) {
+  min-width: 96px;
+  background-image: url('https://www.ged.com/content/dam/websites/ged/logos/ged-logo.svg');
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: contain;
+}
+
+body.ged-poc header nav .nav-brand img {
+  height: 48px;
+  width: auto;
+}
+
 /* let the main row wrap below the utility bar on desktop */
 @media (width >= 900px) {
   body.ged-poc header nav {
