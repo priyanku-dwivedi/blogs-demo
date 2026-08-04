@@ -44,6 +44,7 @@
 .tabs .tabs-panel > h2:first-child {
   font-family: "Roboto Slab", georgia, serif;
   color: var(--ged-text);
-  font-size: 28px;
-  margin: 0 0 20px;
+  font-size: 41px;
+  font-weight: 700;
+  margin: 0 0 24px;
 }

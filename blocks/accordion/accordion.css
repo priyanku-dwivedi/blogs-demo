@@ -1,23 +1,26 @@
-/* Accordion — GED styling (brand teal #0084a9, Roboto).
-   Source: ged.com policy/FAQ pages — each item is a full-width bordered,
-   rounded box with the question in teal and a chevron-down marker on the
-   right; the open item expands to reveal its panel body. */
+/* Accordion — GED policy/FAQ styling matching ged.com.
+   Each item is a white, softly shadowed, rounded box. The question is
+   Roboto Slab, dark gray, ~24px, with a muted chevron on the right; the open
+   item expands to reveal its answer. */
 
 .accordion {
   --ged-brand: #0084a9;
   --ged-text: #303030;
+  --ged-heading-font: "Roboto Slab", georgia, serif;
 
   font-family: Roboto, system-ui, arial, sans-serif;
   color: var(--ged-text);
   margin: 24px 0;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 
 .accordion .accordion-item {
-  border: 1px solid var(--ged-brand);
-  border-radius: 6px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgb(0 0 0 / 8%);
   overflow: hidden;
 }
 
@@ -25,14 +28,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 20px 24px;
+  gap: 24px;
+  padding: 24px 28px;
   margin: 0;
   cursor: pointer;
   list-style: none;
-  font-size: 20px;
-  font-weight: 400;
-  color: var(--ged-brand);
+  font-family: var(--ged-heading-font);
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--ged-text);
 }
 
 /* remove default disclosure triangle */
@@ -41,7 +46,7 @@
 }
 
 .accordion .accordion-item-title:hover {
-  color: #006c8a;
+  color: var(--ged-brand);
 }
 
 /* chevron-down marker on the right; rotates when open */
@@ -49,8 +54,8 @@
   flex: 0 0 auto;
   width: 12px;
   height: 12px;
-  border-right: 2px solid currentcolor;
-  border-bottom: 2px solid currentcolor;
+  border-right: 2px solid #666;
+  border-bottom: 2px solid #666;
   transform: rotate(45deg);
   transition: transform 0.2s ease;
   margin-top: -4px;
@@ -62,7 +67,7 @@
 }
 
 .accordion .accordion-item-body {
-  padding: 0 24px 20px;
+  padding: 0 28px 24px;
   font-size: 17px;
   line-height: 1.6;
   color: var(--ged-text);
