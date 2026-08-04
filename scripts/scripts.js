@@ -281,17 +281,26 @@ export function getSiteSection(pathname = window.location.pathname) {
 }
 
 /**
- * Resolves the nav/footer fragment path for the current page. Page metadata
- * (`nav` / `footer`) always wins; otherwise the hierarchy-based section config
- * applies; otherwise the boilerplate default.
+ * Resolves the nav/footer fragment path for the current page. Resolution order:
+ *   1. page metadata (`nav` / `footer`) — genuinely page-specific override;
+ *   2. hierarchy-based section config (SITE_SECTIONS) matched on path;
+ *   3. the boilerplate default.
+ * `getMetadata` joins duplicate meta tags with ", " — take the first real,
+ * non-default value so a stray global default can't corrupt the path.
  * @param {'nav'|'footer'} kind which fragment to resolve
  * @param {string} defaultPath fallback path (e.g. '/nav')
  */
 export function resolveChromePath(kind, defaultPath) {
-  const meta = getMetadata(kind);
-  if (meta) return new URL(meta, window.location).pathname;
+  const raw = getMetadata(kind);
+  const candidates = raw
+    ? raw.split(',').map((v) => v.trim()).filter(Boolean)
+    : [];
+  // a page-specific value = anything other than the bare default
+  const pageValue = candidates.find((v) => v !== defaultPath);
+  if (pageValue) return new URL(pageValue, window.location).pathname;
   const section = getSiteSection();
   if (section && section[kind]) return section[kind];
+  if (candidates.length) return new URL(candidates[0], window.location).pathname;
   return defaultPath;
 }
 
