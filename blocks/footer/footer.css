@@ -205,11 +205,14 @@ body.ged-poc footer {
   border-top: 1px solid #e5e5e5;
 }
 
-/* Layout: brand/social + columns share the top row; copyright sits below. */
+/* Layout: brand/social + columns share the top row; copyright sits below.
+   Source footer spreads content across the full viewport (~1181px span with
+   ~63px side gutters at 1440), so use a wide max-width + generous side padding
+   rather than the narrower 1200px article width. */
 body.ged-poc footer .footer > div {
-  max-width: 1200px;
+  max-width: 1340px;
   margin: auto;
-  padding: 40px 24px 24px;
+  padding: 48px 48px 24px;
   display: grid;
   grid-template-columns: 1fr;
   gap: 32px;
