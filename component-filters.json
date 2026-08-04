@@ -59,5 +59,11 @@
     "components": [
       "story-pager-item"
     ]
+  },
+  {
+    "id": "tabs",
+    "components": [
+      "tab"
+    ]
   }
 ]
