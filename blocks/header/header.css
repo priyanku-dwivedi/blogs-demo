@@ -347,35 +347,6 @@ body.ged-poc header nav a:any-link {
   font-family: Roboto, system-ui, arial, sans-serif;
 }
 
-/* GED utility bar — slim row above the logo, right-aligned (Search, locale,
-   Educators & Admins). Present only when the nav has a 4th region. */
-body.ged-poc header nav .nav-utility {
-  order: -1;
-  flex-basis: 100%;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 20px;
-  padding: 6px 0;
-  border-bottom: 1px solid #eee;
-  font-size: 14px;
-}
-
-body.ged-poc header nav .nav-utility p {
-  margin: 0;
-}
-
-body.ged-poc header nav .nav-utility a:any-link {
-  color: #303030;
-  font-size: 14px;
-  text-decoration: none;
-}
-
-body.ged-poc header nav .nav-utility a:hover {
-  color: #0084a9;
-  text-decoration: underline;
-}
-
 /* let the main row wrap below the utility bar on desktop */
 @media (width >= 900px) {
   body.ged-poc header nav {
@@ -384,6 +355,32 @@ body.ged-poc header nav .nav-utility a:hover {
     padding-top: 0;
     padding-bottom: 12px;
   }
+}
+
+/* --- element-level rules (lower specificity) first --- */
+
+/* GED utility bar — slim row above the logo, right-aligned with dividers. */
+body.ged-poc header nav .nav-utility {
+  order: -1;
+  flex-basis: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: stretch;
+  gap: 0;
+  min-height: 40px;
+  padding: 0;
+  border-bottom: 1px solid #e5e5e5;
+  font-size: 15px;
+}
+
+body.ged-poc header nav .nav-utility a:any-link {
+  color: #303030;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+body.ged-poc header nav .nav-utility a:hover {
+  color: #0084a9;
 }
 
 body.ged-poc header nav .nav-sections a:any-link {
@@ -396,22 +393,71 @@ body.ged-poc header nav .nav-sections a:hover {
   color: #0084a9;
 }
 
-/* Tools area — Log In (plain) + Sign Up (teal), both text links like the
-   source (no borders/fill). Laid out inline. */
 body.ged-poc header nav .nav-tools {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 24px;
+}
+
+/* GED has no dark mode — hide the color-theme toggle on GED pages. */
+body.ged-poc header nav .nav-theme-toggle {
+  display: none;
+}
+
+/* --- p / child / pseudo rules (higher specificity) after --- */
+
+body.ged-poc header nav .nav-utility p {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  border-left: 1px solid #e5e5e5;
 }
 
 body.ged-poc header nav .nav-tools p {
   margin: 0;
 }
 
-body.ged-poc header nav .nav-tools a:any-link {
+/* Search item: magnifier icon before the label */
+body.ged-poc header nav .nav-utility p:first-child a::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  vertical-align: -3px;
+  background: currentcolor;
+  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="black" stroke-width="2" d="M11 3a8 8 0 105.29 14.03l4.34 4.34 1.41-1.41-4.34-4.34A8 8 0 0011 3z"/></svg>') center/contain no-repeat;
+}
+
+/* locale item: dropdown caret after the label */
+body.ged-poc header nav .nav-utility p:nth-child(2)::after {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-left: 8px;
+  border-right: 2px solid #303030;
+  border-bottom: 2px solid #303030;
+  transform: rotate(45deg) translateY(-2px);
+}
+
+/* Educators & Admins: dark-teal filled tab on the right edge */
+body.ged-poc header nav .nav-utility p:last-child {
+  background-color: #005e78;
+  border-left: 0;
+  padding: 0 22px;
+}
+
+body.ged-poc header nav .nav-utility p:last-child a:any-link {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Log In — plain text */
+body.ged-poc header nav .nav-tools p:first-child a:any-link {
   padding: 0;
   border: 0;
-  border-radius: 0;
   background: none;
   color: #303030;
   font-size: 16px;
@@ -419,17 +465,26 @@ body.ged-poc header nav .nav-tools a:any-link {
   text-decoration: none;
 }
 
-body.ged-poc header nav .nav-tools a:hover {
-  text-decoration: underline;
-}
-
-/* the last tools link is Sign Up — teal + semibold */
-body.ged-poc header nav .nav-tools p:last-child a:any-link {
+body.ged-poc header nav .nav-tools p:first-child a:hover {
   color: #0084a9;
-  font-weight: 600;
 }
 
-/* GED has no dark mode — hide the color-theme toggle on GED pages. */
-body.ged-poc header nav .nav-theme-toggle {
-  display: none;
+/* SIGN UP — rounded teal-outline pill button */
+body.ged-poc header nav .nav-tools p:last-child a:any-link {
+  display: inline-block;
+  padding: 9px 24px;
+  border: 1px solid #0084a9;
+  border-radius: 22px;
+  background: none;
+  color: #0084a9;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+
+body.ged-poc header nav .nav-tools p:last-child a:hover {
+  background-color: #0084a9;
+  color: #fff;
 }
