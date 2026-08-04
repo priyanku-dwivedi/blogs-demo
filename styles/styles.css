@@ -359,3 +359,11 @@ main .section.highlight {
   margin: 0;
   padding: 40px 0;
 }
+
+/* GED POC section — own light brand theme (white page), isolated from the
+   888poker theme and its dark mode. The forceLightTheme flag in scripts.js
+   removes html.dark on these pages; this pins GED surface + text colors. */
+body.ged-poc {
+  background-color: #fff;
+  color: #303030;
+}

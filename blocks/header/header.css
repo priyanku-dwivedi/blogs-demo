@@ -372,3 +372,8 @@ body.ged-poc header nav .nav-tools a:hover {
   background-color: #0084a9;
   color: #fff;
 }
+
+/* GED has no dark mode — hide the color-theme toggle on GED pages. */
+body.ged-poc header nav .nav-theme-toggle {
+  display: none;
+}

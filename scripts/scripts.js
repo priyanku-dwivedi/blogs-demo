@@ -269,6 +269,9 @@ const SITE_SECTIONS = [
     nav: '/ged-pages/nav',
     footer: '/ged-pages/footer',
     bodyClass: 'ged-poc',
+    // GED has its own light-only brand theme — never apply the 888poker dark
+    // mode here, and hide the theme toggle (handled in header.js via bodyClass).
+    forceLightTheme: true,
   },
 ];
 
@@ -323,11 +326,15 @@ export function decorateMain(main) {
  */
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
-  setTheme(getStoredTheme());
-  decorateTemplateAndTheme();
   // Apply the section body class (e.g. ged-poc) so hierarchy-scoped chrome/
-  // styling applies from first paint.
+  // styling applies from first paint. Sections may pin their own theme.
   const section = getSiteSection();
+  if (section && section.forceLightTheme) {
+    document.documentElement.classList.remove('dark');
+  } else {
+    setTheme(getStoredTheme());
+  }
+  decorateTemplateAndTheme();
   if (section && section.bodyClass) document.body.classList.add(section.bodyClass);
   const main = doc.querySelector('main');
   if (main) {
