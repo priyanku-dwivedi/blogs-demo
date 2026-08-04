@@ -1,7 +1,7 @@
 /* Accordion — GED policy/FAQ styling matching ged.com.
-   Each item is a white, softly shadowed, rounded box. The question is
-   Roboto Slab, dark gray, ~24px, with a muted chevron on the right; the open
-   item expands to reveal its answer. */
+   The set reads as one white, softly shadowed, rounded card; items are stacked
+   flush and separated by a thin hairline. Questions are Roboto Slab, dark gray,
+   ~24px, with a chevron on the right that flips up when the item is open. */
 
 .accordion {
   --ged-brand: #0084a9;
@@ -11,17 +11,19 @@
   font-family: Roboto, system-ui, arial, sans-serif;
   color: var(--ged-text);
   margin: 24px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgb(0 0 0 / 8%);
+  overflow: hidden;
 }
 
 .accordion .accordion-item {
-  background: #fff;
-  border: 1px solid #eee;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgb(0 0 0 / 8%);
-  overflow: hidden;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.accordion .accordion-item:last-child {
+  border-bottom: 0;
 }
 
 .accordion .accordion-item-title {
@@ -29,7 +31,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 24px 28px;
+  padding: 22px 28px;
   margin: 0;
   cursor: pointer;
   list-style: none;
@@ -49,25 +51,22 @@
   color: var(--ged-brand);
 }
 
-/* chevron-down marker on the right; rotates when open */
+/* chevron marker on the right — a down-pointing "v" that flips up when open */
 .accordion .accordion-item-marker {
   flex: 0 0 auto;
-  width: 12px;
-  height: 12px;
-  border-right: 2px solid #666;
-  border-bottom: 2px solid #666;
-  transform: rotate(45deg);
+  width: 22px;
+  height: 22px;
+  background-color: #555;
   transition: transform 0.2s ease;
-  margin-top: -4px;
+  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>') center / contain no-repeat;
 }
 
 .accordion .accordion-item[open] .accordion-item-marker {
-  transform: rotate(-135deg);
-  margin-top: 4px;
+  transform: rotate(180deg);
 }
 
 .accordion .accordion-item-body {
-  padding: 0 28px 24px;
+  padding: 0 28px 22px;
   font-size: 17px;
   line-height: 1.6;
   color: var(--ged-text);
