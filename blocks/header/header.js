@@ -1,6 +1,5 @@
-import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
-import { getStoredTheme, setTheme } from '../../scripts/scripts.js';
+import { getStoredTheme, setTheme, resolveChromePath } from '../../scripts/scripts.js';
 
 /**
  * Builds the dark/light color-theme toggle shown in the nav, matching the
@@ -137,9 +136,9 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
  * @param {Element} block The header block element
  */
 export default async function decorate(block) {
-  // load nav as fragment
-  const navMeta = getMetadata('nav');
-  const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
+  // load nav as fragment — page metadata wins, else the page's site-section
+  // (hierarchy) chrome, else the default /nav.
+  const navPath = resolveChromePath('nav', '/nav');
   const fragment = await loadFragment(navPath);
 
   // decorate nav DOM

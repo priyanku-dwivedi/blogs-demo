@@ -254,6 +254,48 @@ export function setTheme(theme) {
 }
 
 /**
+ * Site sections — different content hierarchies get different chrome (nav +
+ * footer) and a body class for section-scoped styling. Add an entry per brand/
+ * sub-site. `prefix` is matched against the current page path; the first match
+ * wins, so list more specific prefixes first. The default 888poker chrome
+ * (`/nav`, `/footer`) is the implicit fallback when nothing matches.
+ *
+ * On delivery the content root is stripped (e.g. /content/blogs-888/ged-pages/x
+ * → /ged-pages/x), so prefixes are authored as delivery paths.
+ */
+const SITE_SECTIONS = [
+  {
+    prefix: '/ged-pages',
+    nav: '/ged-pages/nav',
+    footer: '/ged-pages/footer',
+    bodyClass: 'ged-poc',
+  },
+];
+
+/**
+ * Returns the site-section config whose prefix matches the given path, or null.
+ * @param {string} [pathname] path to test (defaults to current location)
+ */
+export function getSiteSection(pathname = window.location.pathname) {
+  return SITE_SECTIONS.find((s) => pathname.startsWith(s.prefix)) || null;
+}
+
+/**
+ * Resolves the nav/footer fragment path for the current page. Page metadata
+ * (`nav` / `footer`) always wins; otherwise the hierarchy-based section config
+ * applies; otherwise the boilerplate default.
+ * @param {'nav'|'footer'} kind which fragment to resolve
+ * @param {string} defaultPath fallback path (e.g. '/nav')
+ */
+export function resolveChromePath(kind, defaultPath) {
+  const meta = getMetadata(kind);
+  if (meta) return new URL(meta, window.location).pathname;
+  const section = getSiteSection();
+  if (section && section[kind]) return section[kind];
+  return defaultPath;
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -274,6 +316,10 @@ async function loadEager(doc) {
   document.documentElement.lang = 'en';
   setTheme(getStoredTheme());
   decorateTemplateAndTheme();
+  // Apply the section body class (e.g. ged-poc) so hierarchy-scoped chrome/
+  // styling applies from first paint.
+  const section = getSiteSection();
+  if (section && section.bodyClass) document.body.classList.add(section.bodyClass);
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
