@@ -30,7 +30,8 @@
    GED variants (POC) — additive; do not affect the default cards above.
    --------------------------------------------------------------------------- */
 .cards.ged-steps,
-.cards.ged-story {
+.cards.ged-story,
+.cards.ged-options {
   --ged-brand: #0084a9;
   --ged-text: #303030;
 
@@ -119,9 +120,53 @@
   text-decoration: none;
 }
 
+/* GED "Request Transcripts" option cards — year-range choices, each a single
+   clickable card with a Roboto Slab heading link and a description. */
+.cards.ged-options > ul {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.cards.ged-options > ul > li {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 12px rgb(0 0 0 / 6%);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.cards.ged-options > ul > li:hover {
+  box-shadow: 0 6px 20px rgb(0 0 0 / 12%);
+  transform: translateY(-2px);
+}
+
+.cards.ged-options .cards-card-body {
+  margin: 24px;
+  color: var(--ged-text);
+}
+
+.cards.ged-options .cards-card-body h3 {
+  font-family: "Roboto Slab", georgia, serif;
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0 0 10px;
+}
+
+.cards.ged-options .cards-card-body h3 a {
+  color: var(--ged-brand);
+  text-decoration: none;
+}
+
+.cards.ged-options .cards-card-body p {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
 /* GED card link hover — placed last to satisfy no-descending-specificity. */
 .cards.ged-steps .cards-card-body a:hover,
-.cards.ged-story .cards-card-body a:hover {
+.cards.ged-story .cards-card-body a:hover,
+.cards.ged-options .cards-card-body h3 a:hover {
   text-decoration: underline;
 }
 

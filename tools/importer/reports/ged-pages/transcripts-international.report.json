@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://www.ged.com/transcripts/international.html",
+  "path": "ged-pages/transcripts-international",
+  "timestamp": "2026-08-04T13:51:58.343Z",
+  "title": "International - GED",
+  "template": "transcripts",
+  "blocks": [
+    "ged-cards"
+  ]
+}
