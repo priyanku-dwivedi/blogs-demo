@@ -64,7 +64,8 @@
   background-position: center;
 }
 
-.hero.ged-hero h1 {
+.hero.ged-hero h1,
+.hero.ged-hero h2 {
   font-family: "Roboto Slab", georgia, serif;
   font-size: clamp(34px, 5vw, 50px);
   line-height: 1.15;
@@ -78,8 +79,11 @@
   max-width: 720px;
 }
 
+/* CTA — style the standalone sign-up link as a solid teal button even when the
+   markup did not add a .button class (a link alone in its own paragraph). */
 .hero.ged-hero .button,
-.hero.ged-hero a.button {
+.hero.ged-hero a.button,
+.hero.ged-hero p > a:only-child {
   display: inline-block;
   margin-top: 8px;
   padding: 13px 26px;
@@ -110,7 +114,8 @@
 }
 
 .hero.ged-cta .button,
-.hero.ged-cta a.button {
+.hero.ged-cta a.button,
+.hero.ged-cta p > a:only-child {
   display: inline-block;
   padding: 14px 32px;
   background-color: var(--ged-brand);
