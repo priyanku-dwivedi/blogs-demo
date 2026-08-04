@@ -382,18 +382,21 @@ body.ged-poc header nav .nav-brand img {
 
 /* --- element-level rules (lower specificity) first --- */
 
-/* GED utility bar — slim row above the logo, right-aligned with dividers. */
+/* GED utility bar — full-width band above the logo; the actual items live in a
+   .default-content-wrapper inside it, so the flex row goes on the wrapper. */
 body.ged-poc header nav .nav-utility {
   order: -1;
   flex-basis: 100%;
+  border-bottom: 1px solid #e5e5e5;
+  font-size: 15px;
+}
+
+body.ged-poc header nav .nav-utility .default-content-wrapper {
   display: flex;
   justify-content: flex-end;
   align-items: stretch;
   gap: 0;
   min-height: 40px;
-  padding: 0;
-  border-bottom: 1px solid #e5e5e5;
-  font-size: 15px;
 }
 
 body.ged-poc header nav .nav-utility a:any-link {
@@ -416,7 +419,8 @@ body.ged-poc header nav .nav-sections a:hover {
   color: #0084a9;
 }
 
-body.ged-poc header nav .nav-tools {
+body.ged-poc header nav .nav-tools,
+body.ged-poc header nav .nav-tools .default-content-wrapper {
   display: flex;
   align-items: center;
   gap: 24px;
