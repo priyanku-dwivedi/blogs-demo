@@ -57,13 +57,24 @@
   position: relative;
   min-height: 460px;
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  text-align: center;
   padding: 48px;
   overflow: hidden;
   background-color: var(--ged-brand-dark);
   background-image: linear-gradient(120deg, #005e78 0%, #0084a9 60%, #12a0c4 100%);
   background-size: cover;
   background-position: center;
+}
+
+/* center the hero content (headline + subhead + CTA) across the full band,
+   matching the source (full-width column, centered text). */
+.hero.ged-hero > div:not(.hero-bg) {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
 }
 
 /* Full-bleed authored background photo + dark scrim for legible white text. */
