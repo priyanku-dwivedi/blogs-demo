@@ -190,16 +190,24 @@ footer .footer > div > div:nth-child(3) .default-content-wrapper p:has(a[href*="
 }
 
 /* ---------------------------------------------------------------------------
-   GED footer (POC) — scoped to body.ged-poc. Light footer, brand teal links.
+   GED footer (POC) — scoped to body.ged-poc. Light footer matching ged.com:
+   brand line + social row, three link columns, small gray copyright.
+   Content regions (from content/ged-pages/footer.plain.html):
+     div:nth-child(1) = brand line + social links
+     div:nth-child(2) = three <ul> link columns
+     div:nth-child(3) = copyright
    --------------------------------------------------------------------------- */
 body.ged-poc footer {
   background-color: #f4f4f4;
   color: #303030;
   font-family: Roboto, system-ui, arial, sans-serif;
+  font-size: 16px;
 }
 
 body.ged-poc footer .footer > div {
   border-bottom: 0;
+  max-width: 1200px;
+  padding: 32px 24px;
 }
 
 body.ged-poc footer .footer a:any-link {
@@ -210,4 +218,48 @@ body.ged-poc footer .footer a:any-link {
 body.ged-poc footer .footer a:hover {
   color: #0084a9;
   text-decoration: underline;
+}
+
+/* region 1 — brand line + social row */
+body.ged-poc footer .footer > div > div:first-child .default-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+body.ged-poc footer .footer > div > div:first-child p:last-child {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 0;
+}
+
+/* region 2 — three link columns */
+body.ged-poc footer .footer > div > div:nth-child(2) .default-content-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+body.ged-poc footer .footer > div > div:nth-child(2) ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+body.ged-poc footer .footer > div > div:nth-child(2) li {
+  padding: 6px 0;
+}
+
+/* region 3 — copyright: small, muted gray */
+body.ged-poc footer .footer > div > div:last-child {
+  color: #636363;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+@media (width >= 900px) {
+  body.ged-poc footer .footer > div > div:nth-child(2) .default-content-wrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }

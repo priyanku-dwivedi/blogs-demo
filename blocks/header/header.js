@@ -147,7 +147,13 @@ export default async function decorate(block) {
   nav.id = 'nav';
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
 
-  const classes = ['brand', 'sections', 'tools'];
+  // Region mapping. The base layout is brand / sections / tools (3 regions).
+  // A nav may prepend an optional utility row (e.g. GED: Search, locale,
+  // Educators) — detected when there are 4+ regions — so the trailing three
+  // stay brand / sections / tools and the leader becomes the utility bar.
+  const classes = nav.children.length >= 4
+    ? ['utility', 'brand', 'sections', 'tools']
+    : ['brand', 'sections', 'tools'];
   classes.forEach((c, i) => {
     const section = nav.children[i];
     if (section) section.classList.add(`nav-${c}`);
