@@ -54,14 +54,36 @@
    background image is set, fall back to a brand-teal gradient so the white
    headline/subhead stay legible (the source hero sits on a teal-toned photo). */
 .hero.ged-hero {
+  position: relative;
   min-height: 460px;
   display: flex;
   align-items: center;
   padding: 48px;
+  overflow: hidden;
   background-color: var(--ged-brand-dark);
   background-image: linear-gradient(120deg, #005e78 0%, #0084a9 60%, #12a0c4 100%);
   background-size: cover;
   background-position: center;
+}
+
+/* Full-bleed authored background photo + dark scrim for legible white text. */
+.hero.ged-hero.has-bg .hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero.ged-hero.has-bg .hero-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgb(0 0 0 / 55%) 0%, rgb(0 0 0 / 25%) 60%, rgb(0 0 0 / 10%) 100%);
+}
+
+/* keep the text content above the background layer */
+.hero.ged-hero.has-bg > div:not(.hero-bg) {
+  position: relative;
+  z-index: 1;
 }
 
 .hero.ged-hero h1,
@@ -179,4 +201,15 @@
 .hero.ged-hero .button:hover,
 .hero.ged-cta .button:hover {
   background-color: var(--ged-brand-dark);
+}
+
+/* Hero background image — placed after the ged-story picture/img rules so the
+   higher-specificity has-bg selectors don't precede them (no-descending-specificity). */
+.hero.ged-hero.has-bg .hero-bg picture,
+.hero.ged-hero.has-bg .hero-bg img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

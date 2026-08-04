@@ -103,6 +103,17 @@
   overflow: hidden;
 }
 
+/* portrait image spans the top of the story card */
+.cards.ged-story .cards-card-image {
+  line-height: 0;
+}
+
+.cards.ged-story .cards-card-image img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
 .cards.ged-story .cards-card-body {
   margin: 20px;
   color: var(--ged-text);
