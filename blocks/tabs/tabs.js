@@ -9,6 +9,7 @@
  * each panel's Q&A paragraphs into an expand/collapse accordion.
  * Used by the GED policy-country template (category tabs → accordion sets).
  */
+import { loadCSS } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
 /*
@@ -101,6 +102,10 @@ export default async function decorate(block) {
   });
 
   block.append(tablist, panels);
+
+  // The accordion lives nested inside this block, so EDS never auto-loads its
+  // stylesheet — load it explicitly so the accordion is styled.
+  loadCSS(`${window.hlx.codeBasePath}/blocks/accordion/accordion.css`);
 
   // Each panel's Q&A arrives as flat <p> pairs (a nested accordion block does
   // not survive publish). Rebuild an accordion in every panel; if a real
