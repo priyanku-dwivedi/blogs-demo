@@ -25,3 +25,103 @@
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
+
+/* ---------------------------------------------------------------------------
+   GED variants (POC) — additive; do not affect the default cards above.
+   --------------------------------------------------------------------------- */
+.cards.ged-steps,
+.cards.ged-story {
+  --ged-brand: #0084a9;
+  --ged-text: #303030;
+
+  font-family: Roboto, system-ui, arial, sans-serif;
+}
+
+/* GED "How to earn your GED" — 4 numbered step cards, borderless, centered */
+.cards.ged-steps > ul {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 32px;
+  counter-reset: ged-step;
+}
+
+.cards.ged-steps > ul > li {
+  border: 0;
+  background: none;
+  text-align: center;
+  position: relative;
+  padding-top: 64px;
+  counter-increment: ged-step;
+}
+
+/* numbered badge (uses the card's own image if present, else CSS counter) */
+.cards.ged-steps > ul > li::before {
+  content: counter(ged-step);
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--ged-brand);
+  color: #fff;
+  font-size: 22px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cards.ged-steps > ul > li img {
+  display: none;
+}
+
+.cards.ged-steps .cards-card-body {
+  margin: 0;
+  color: var(--ged-text);
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.cards.ged-steps .cards-card-body a {
+  color: var(--ged-brand);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* GED story teaser cards — name + quote + View Story link */
+.cards.ged-story > ul {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.cards.ged-story > ul > li {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.cards.ged-story .cards-card-body {
+  margin: 20px;
+  color: var(--ged-text);
+}
+
+.cards.ged-story .cards-card-body h3 {
+  font-family: "Roboto Slab", georgia, serif;
+  color: var(--ged-text);
+  margin: 0 0 8px;
+}
+
+.cards.ged-story .cards-card-body a {
+  color: var(--ged-brand);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* GED card link hover — placed last to satisfy no-descending-specificity. */
+.cards.ged-steps .cards-card-body a:hover,
+.cards.ged-story .cards-card-body a:hover {
+  text-decoration: underline;
+}
+

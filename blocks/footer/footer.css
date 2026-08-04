@@ -188,3 +188,26 @@ footer .footer > div > div:nth-child(3) .default-content-wrapper p:has(a[href*="
   flex-basis: 100%;
   text-align: center;
 }
+
+/* ---------------------------------------------------------------------------
+   GED footer (POC) — scoped to body.ged-poc. Light footer, brand teal links.
+   --------------------------------------------------------------------------- */
+body.ged-poc footer {
+  background-color: #f4f4f4;
+  color: #303030;
+  font-family: Roboto, system-ui, arial, sans-serif;
+}
+
+body.ged-poc footer .footer > div {
+  border-bottom: 0;
+}
+
+body.ged-poc footer .footer a:any-link {
+  color: #303030;
+  text-decoration: none;
+}
+
+body.ged-poc footer .footer a:hover {
+  color: #0084a9;
+  text-decoration: underline;
+}

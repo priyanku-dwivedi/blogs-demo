@@ -22,6 +22,12 @@
     ]
   },
   {
+    "id": "accordion",
+    "components": [
+      "accordion-item"
+    ]
+  },
+  {
     "id": "cards",
     "components": [
       "card"
@@ -46,6 +52,12 @@
     "id": "featured-articles",
     "components": [
       "article-card"
+    ]
+  },
+  {
+    "id": "story-pager",
+    "components": [
+      "story-pager-item"
     ]
   }
 ]

@@ -1,0 +1,72 @@
+/* Accordion — GED styling (brand teal #0084a9, Roboto).
+   Source: ged.com policy/FAQ pages — a stack of expandable rows with a thin
+   divider between them and a +/- (chevron) marker on the right. */
+
+.accordion {
+  --ged-brand: #0084a9;
+  --ged-text: #303030;
+
+  font-family: Roboto, system-ui, arial, sans-serif;
+  color: var(--ged-text);
+  border-top: 1px solid #e0e0e0;
+  margin: 24px 0;
+}
+
+.accordion .accordion-item {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.accordion .accordion-item-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 4px;
+  margin: 0;
+  cursor: pointer;
+  list-style: none;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ged-brand);
+}
+
+/* remove default disclosure triangle */
+.accordion .accordion-item-title::-webkit-details-marker {
+  display: none;
+}
+
+.accordion .accordion-item-title:hover {
+  color: #006c8a;
+}
+
+/* chevron marker on the right */
+.accordion .accordion-item-marker {
+  flex: 0 0 auto;
+  width: 14px;
+  height: 14px;
+  border-right: 2px solid currentcolor;
+  border-bottom: 2px solid currentcolor;
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+  margin-right: 6px;
+}
+
+.accordion .accordion-item[open] .accordion-item-marker {
+  transform: rotate(-135deg);
+}
+
+.accordion .accordion-item-body {
+  padding: 0 4px 20px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ged-text);
+}
+
+.accordion .accordion-item-body p {
+  margin: 0 0 12px;
+}
+
+.accordion .accordion-item-body a {
+  color: var(--ged-brand);
+  text-decoration: underline;
+}
