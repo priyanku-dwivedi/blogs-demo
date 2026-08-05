@@ -21,6 +21,16 @@
       "id": "columns",
       "fields": [
         {
+          "component": "select",
+          "name": "classes",
+          "label": "Variation",
+          "value": "",
+          "options": [
+            { "name": "Default", "value": "" },
+            { "name": "GED Feature (text + framed photo)", "value": "ged-feature" }
+          ]
+        },
+        {
           "component": "text",
           "valueType": "number",
           "name": "columns",
