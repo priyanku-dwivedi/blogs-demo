@@ -25,3 +25,206 @@
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
+
+/* ---------------------------------------------------------------------------
+   GED variants (POC) — additive; do not affect the default cards above.
+   --------------------------------------------------------------------------- */
+.cards.ged-steps,
+.cards.ged-story,
+.cards.ged-options,
+.cards.ged-contact {
+  --ged-brand: #0084a9;
+  --ged-text: #303030;
+
+  font-family: Roboto, system-ui, arial, sans-serif;
+}
+
+/* GED "How to earn your GED" — 4 numbered step cards, borderless, centered */
+.cards.ged-steps > ul {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 32px;
+  counter-reset: ged-step;
+}
+
+.cards.ged-steps > ul > li {
+  border: 0;
+  background: none;
+  text-align: center;
+  position: relative;
+  padding-top: 64px;
+  counter-increment: ged-step;
+}
+
+/* numbered badge (uses the card's own image if present, else CSS counter) */
+.cards.ged-steps > ul > li::before {
+  content: counter(ged-step);
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--ged-brand);
+  color: #fff;
+  font-size: 22px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cards.ged-steps > ul > li img {
+  display: none;
+}
+
+.cards.ged-steps .cards-card-body {
+  margin: 0;
+  color: var(--ged-text);
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.cards.ged-steps .cards-card-body a {
+  color: var(--ged-brand);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* GED story teaser cards — name + quote + View Story link */
+.cards.ged-story > ul {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.cards.ged-story > ul > li {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+
+/* portrait image spans the top of the story card */
+.cards.ged-story .cards-card-image {
+  line-height: 0;
+}
+
+.cards.ged-story .cards-card-image img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.cards.ged-story .cards-card-body {
+  margin: 20px;
+  color: var(--ged-text);
+}
+
+.cards.ged-story .cards-card-body h3 {
+  font-family: "Roboto Slab", georgia, serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--ged-text);
+  margin: 0 0 8px;
+}
+
+.cards.ged-story .cards-card-body p {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.cards.ged-story .cards-card-body a {
+  color: var(--ged-brand);
+  font-weight: 400;
+  text-decoration: none;
+}
+
+/* GED "Request Transcripts" option cards — year-range choices, each a single
+   clickable card with a Roboto Slab heading link and a description. */
+.cards.ged-options > ul {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.cards.ged-options > ul > li {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 12px rgb(0 0 0 / 6%);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.cards.ged-options .cards-card-body {
+  margin: 24px;
+  color: var(--ged-text);
+}
+
+.cards.ged-options .cards-card-body h3 {
+  font-family: "Roboto Slab", georgia, serif;
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0 0 10px;
+}
+
+.cards.ged-options .cards-card-body h3 a {
+  color: var(--ged-brand);
+  text-decoration: none;
+}
+
+.cards.ged-options .cards-card-body p {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* GED "Regional Contact Details" — grid of bordered contact cards, each with a
+   teal region heading and stacked contact lines (hours, phone, email). */
+.cards.ged-contact > ul {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.cards.ged-contact > ul > li {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 12px rgb(0 0 0 / 6%);
+}
+
+.cards.ged-contact .cards-card-body {
+  margin: 24px;
+  color: var(--ged-text);
+}
+
+.cards.ged-contact .cards-card-body h3 {
+  font-family: "Roboto Slab", georgia, serif;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--ged-brand);
+  margin: 0 0 12px;
+}
+
+.cards.ged-contact .cards-card-body p {
+  font-size: 16px;
+  line-height: 1.55;
+  margin: 0 0 4px;
+}
+
+.cards.ged-contact .cards-card-body p a {
+  color: var(--ged-brand);
+  text-decoration: none;
+}
+
+/* GED card hover states — placed last to satisfy no-descending-specificity. */
+.cards.ged-options > ul > li:hover {
+  box-shadow: 0 6px 20px rgb(0 0 0 / 12%);
+  transform: translateY(-2px);
+}
+
+.cards.ged-steps .cards-card-body a:hover,
+.cards.ged-story .cards-card-body a:hover,
+.cards.ged-options .cards-card-body h3 a:hover,
+.cards.ged-contact .cards-card-body p a:hover {
+  text-decoration: underline;
+}
+

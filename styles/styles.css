@@ -359,3 +359,57 @@ main .section.highlight {
   margin: 0;
   padding: 40px 0;
 }
+
+/* GED POC section — own light brand theme (white page), isolated from the
+   888poker theme and its dark mode. The forceLightTheme flag in scripts.js
+   removes html.dark on these pages; this pins GED surface + text colors. */
+body.ged-poc {
+  background-color: #fff;
+
+  /* clear the 888poker dotted background pattern so the GED content area is a
+     clean white surface like the source site */
+  background-image: none;
+  color: #303030;
+  font-family: Roboto, system-ui, arial, sans-serif;
+}
+
+/* GED headings use Roboto Slab; the page H1 (e.g. "India") is teal like the
+   source, section H2s are dark. */
+body.ged-poc main h1,
+body.ged-poc main h2,
+body.ged-poc main h3 {
+  font-family: "Roboto Slab", georgia, serif;
+}
+
+body.ged-poc main h1 {
+  color: #0084a9;
+  font-size: 50px;
+  font-weight: 600;
+  text-transform: none;
+}
+
+/* GED default-content feature sections (e.g. "Internationally recognized"):
+   the source renders these H2s in large teal Roboto Slab, weight 400, and the
+   trailing standalone link as a solid teal button. */
+body.ged-poc main .default-content-wrapper h2 {
+  color: #0084a9;
+  font-size: clamp(30px, 3.4vw, 50px);
+  font-weight: 400;
+  line-height: 1.15;
+  margin: 8px 0 16px;
+}
+
+body.ged-poc main .default-content-wrapper p {
+  font-size: 18px;
+  line-height: 1.6;
+  max-width: 900px;
+}
+
+/* Inline default-content links are plain teal text links (matches the source —
+   e.g. the "FAQ" and "Click here" links sit inside sentences, not buttons).
+   Standalone CTA buttons live inside the hero/columns feature blocks, which
+   style their own links. */
+body.ged-poc main .default-content-wrapper p a {
+  color: #0084a9;
+  text-decoration: underline;
+}

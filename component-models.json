@@ -251,6 +251,25 @@
     ]
   },
   {
+    "id": "accordion-item",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "body",
+        "label": "Body",
+        "value": ""
+      }
+    ]
+  },
+  {
     "id": "article-hero",
     "fields": [
       {
@@ -455,6 +474,39 @@
     ]
   },
   {
+    "id": "cards",
+    "fields": [
+      {
+        "component": "select",
+        "name": "classes",
+        "label": "Variation",
+        "value": "",
+        "options": [
+          {
+            "name": "Default",
+            "value": ""
+          },
+          {
+            "name": "GED Steps (numbered)",
+            "value": "ged-steps"
+          },
+          {
+            "name": "GED Story teasers",
+            "value": "ged-story"
+          },
+          {
+            "name": "GED Options (year ranges)",
+            "value": "ged-options"
+          },
+          {
+            "name": "GED Contact (regional)",
+            "value": "ged-contact"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "card",
     "fields": [
       {
@@ -507,6 +559,22 @@
   {
     "id": "columns",
     "fields": [
+      {
+        "component": "select",
+        "name": "classes",
+        "label": "Variation",
+        "value": "",
+        "options": [
+          {
+            "name": "Default",
+            "value": ""
+          },
+          {
+            "name": "GED Feature (text + framed photo)",
+            "value": "ged-feature"
+          }
+        ]
+      },
       {
         "component": "text",
         "valueType": "number",
@@ -602,6 +670,34 @@
     "id": "hero",
     "fields": [
       {
+        "component": "select",
+        "name": "classes",
+        "label": "Variation",
+        "value": "",
+        "options": [
+          {
+            "name": "Default",
+            "value": ""
+          },
+          {
+            "name": "GED Home (headline over photo)",
+            "value": "ged-hero"
+          },
+          {
+            "name": "GED CTA band",
+            "value": "ged-cta"
+          },
+          {
+            "name": "GED Story (portrait + quote)",
+            "value": "ged-story"
+          },
+          {
+            "name": "GED Banner (image only)",
+            "value": "ged-banner"
+          }
+        ]
+      },
+      {
         "component": "reference",
         "valueType": "string",
         "name": "image",
@@ -621,6 +717,50 @@
         "value": "",
         "label": "Text",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "story-pager-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "label",
+        "label": "Label",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "name",
+        "label": "Story Name",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "link",
+        "label": "Link"
+      }
+    ]
+  },
+  {
+    "id": "tab",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "label",
+        "label": "Tab Label",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "body",
+        "label": "Tab Content",
+        "value": ""
       }
     ]
   },

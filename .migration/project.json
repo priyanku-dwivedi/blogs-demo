@@ -1,0 +1,12 @@
+{
+  "sites": {
+    "blogs-demo": {
+      "previewOrg": "priyanku-dwivedi",
+      "previewSite": "blogs-demo",
+      "aemSitePath": "/content/blogs-888",
+      "aemAssetsFolderPath": "/content/dam/blogs-888",
+      "aemSiteName": "blogs-888",
+      "aemSiteTitle": "Blogs Site Demo"
+    }
+  }
+}

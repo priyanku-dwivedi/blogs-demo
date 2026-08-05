@@ -264,6 +264,24 @@
           "defaultContent": []
         }
       ]
+    },
+    {
+      "name": "transcripts",
+      "urls": [
+        "https://www.ged.com/transcripts/international.html"
+      ],
+      "representativeUrl": "https://www.ged.com/transcripts/international.html",
+      "coverageGaps": [],
+      "description": "GED \"Request Transcripts\" page: an H1 + subheading followed by a set of year-range option cards (each a single link) that route to the right transcript-request destination.",
+      "blocks": [
+        {
+          "name": "ged-cards",
+          "instances": [
+            "section.column-control:has(a h3)"
+          ]
+        }
+      ],
+      "sections": []
     }
   ]
 }

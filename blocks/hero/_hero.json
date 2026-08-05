@@ -21,6 +21,19 @@
       "id": "hero",
       "fields": [
         {
+          "component": "select",
+          "name": "classes",
+          "label": "Variation",
+          "value": "",
+          "options": [
+            { "name": "Default", "value": "" },
+            { "name": "GED Home (headline over photo)", "value": "ged-hero" },
+            { "name": "GED CTA band", "value": "ged-cta" },
+            { "name": "GED Story (portrait + quote)", "value": "ged-story" },
+            { "name": "GED Banner (image only)", "value": "ged-banner" }
+          ]
+        },
+        {
           "component": "reference",
           "valueType": "string",
           "name": "image",

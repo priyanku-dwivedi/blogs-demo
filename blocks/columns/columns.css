@@ -31,3 +31,63 @@
     order: unset;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   GED feature variant (home page): a text column (teal Roboto Slab heading,
+   paragraph, teal button) beside a framed photo. Additive; scoped to
+   .columns.ged-feature so the default columns block is unaffected.
+   --------------------------------------------------------------------------- */
+.columns.ged-feature {
+  --ged-brand: #0084a9;
+  --ged-text: #303030;
+
+  font-family: Roboto, system-ui, arial, sans-serif;
+  margin: 56px auto;
+}
+
+.columns.ged-feature h2 {
+  font-family: "Roboto Slab", georgia, serif;
+  color: var(--ged-brand);
+  font-size: clamp(30px, 3vw, 44px);
+  font-weight: 400;
+  line-height: 1.15;
+  margin: 0 0 16px;
+}
+
+.columns.ged-feature p {
+  color: var(--ged-text);
+  font-size: 17px;
+  line-height: 1.6;
+  margin: 0 0 20px;
+}
+
+/* teal button (source renders the CTA link as a solid teal pill) */
+.columns.ged-feature .button-container a,
+.columns.ged-feature a.button,
+.columns.ged-feature p > a:only-child {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: var(--ged-brand);
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+/* framed photo — teal offset frame like the source */
+.columns.ged-feature > div > div img {
+  display: block;
+  width: 100%;
+  border-radius: 2px;
+  box-shadow: 16px 16px 0 -2px rgb(0 132 169 / 25%);
+}
+
+@media (width >= 900px) {
+  .columns.ged-feature > div {
+    gap: 56px;
+    align-items: center;
+  }
+}

@@ -254,6 +254,60 @@ export function setTheme(theme) {
 }
 
 /**
+ * Site sections — different content hierarchies get different chrome (nav +
+ * footer) and a body class for section-scoped styling. Add an entry per brand/
+ * sub-site. `prefix` is matched against the current page path; the first match
+ * wins, so list more specific prefixes first. The default 888poker chrome
+ * (`/nav`, `/footer`) is the implicit fallback when nothing matches.
+ *
+ * On delivery the content root is stripped (e.g. /content/blogs-888/ged-pages/x
+ * → /ged-pages/x), so prefixes are authored as delivery paths.
+ */
+const SITE_SECTIONS = [
+  {
+    prefix: '/ged-pages',
+    nav: '/ged-pages/nav',
+    footer: '/ged-pages/footer',
+    bodyClass: 'ged-poc',
+    // GED has its own light-only brand theme — never apply the 888poker dark
+    // mode here, and hide the theme toggle (handled in header.js via bodyClass).
+    forceLightTheme: true,
+  },
+];
+
+/**
+ * Returns the site-section config whose prefix matches the given path, or null.
+ * @param {string} [pathname] path to test (defaults to current location)
+ */
+export function getSiteSection(pathname = window.location.pathname) {
+  return SITE_SECTIONS.find((s) => pathname.startsWith(s.prefix)) || null;
+}
+
+/**
+ * Resolves the nav/footer fragment path for the current page. Resolution order:
+ *   1. page metadata (`nav` / `footer`) — genuinely page-specific override;
+ *   2. hierarchy-based section config (SITE_SECTIONS) matched on path;
+ *   3. the boilerplate default.
+ * `getMetadata` joins duplicate meta tags with ", " — take the first real,
+ * non-default value so a stray global default can't corrupt the path.
+ * @param {'nav'|'footer'} kind which fragment to resolve
+ * @param {string} defaultPath fallback path (e.g. '/nav')
+ */
+export function resolveChromePath(kind, defaultPath) {
+  const raw = getMetadata(kind);
+  const candidates = raw
+    ? raw.split(',').map((v) => v.trim()).filter(Boolean)
+    : [];
+  // a page-specific value = anything other than the bare default
+  const pageValue = candidates.find((v) => v !== defaultPath);
+  if (pageValue) return new URL(pageValue, window.location).pathname;
+  const section = getSiteSection();
+  if (section && section[kind]) return section[kind];
+  if (candidates.length) return new URL(candidates[0], window.location).pathname;
+  return defaultPath;
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -272,8 +326,16 @@ export function decorateMain(main) {
  */
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
-  setTheme(getStoredTheme());
+  // Apply the section body class (e.g. ged-poc) so hierarchy-scoped chrome/
+  // styling applies from first paint. Sections may pin their own theme.
+  const section = getSiteSection();
+  if (section && section.forceLightTheme) {
+    document.documentElement.classList.remove('dark');
+  } else {
+    setTheme(getStoredTheme());
+  }
   decorateTemplateAndTheme();
+  if (section && section.bodyClass) document.body.classList.add(section.bodyClass);
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);

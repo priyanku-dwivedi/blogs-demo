@@ -1,0 +1,50 @@
+/* Tabs — GED policy/category style: a row of pill tabs (active = filled teal,
+   inactive = teal outline) above switchable panels. */
+
+.tabs {
+  --ged-brand: #0084a9;
+  --ged-brand-dark: #006c8a;
+  --ged-text: #303030;
+
+  font-family: Roboto, system-ui, arial, sans-serif;
+  margin: 16px 0 32px;
+}
+
+.tabs .tabs-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.tabs .tabs-tab {
+  padding: 9px 20px;
+  border: 1px solid var(--ged-brand);
+  border-radius: 22px;
+  background: none;
+  color: var(--ged-brand);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.tabs .tabs-tab:hover {
+  background-color: rgb(0 132 169 / 8%);
+}
+
+.tabs .tabs-tab[aria-selected="true"] {
+  background-color: var(--ged-brand);
+  color: #fff;
+}
+
+.tabs .tabs-panel > h2:first-child {
+  font-family: "Roboto Slab", georgia, serif;
+  color: var(--ged-text);
+  font-size: 41px;
+  font-weight: 700;
+  margin: 0 0 24px;
+}
