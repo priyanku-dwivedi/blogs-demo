@@ -218,6 +218,22 @@
   background-color: var(--ged-brand-dark);
 }
 
+/* GED banner — a short, full-width image-only banner (e.g. Contact Us). No
+   text overlay/scrim; the image is simply displayed edge to edge. */
+.hero.ged-banner {
+  margin: 0 0 24px;
+  padding: 0;
+  line-height: 0;
+}
+
+.hero.ged-banner > div picture,
+.hero.ged-banner > div img {
+  display: block;
+  width: 100%;
+  max-height: 340px;
+  object-fit: cover;
+}
+
 /* Hero background image — placed after the ged-story picture/img rules so the
    higher-specificity has-bg selectors don't precede them (no-descending-specificity). */
 .hero.ged-hero.has-bg .hero-bg picture,
