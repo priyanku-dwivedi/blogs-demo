@@ -401,22 +401,11 @@ body.ged-poc main .default-content-wrapper p {
   max-width: 900px;
 }
 
-/* standalone link in a default-content paragraph -> teal button */
-body.ged-poc main .default-content-wrapper p > a:only-child {
-  display: inline-block;
-  margin-top: 8px;
-  padding: 13px 26px;
-  background-color: #0084a9;
-  color: #fff;
-  font-weight: 600;
-  font-size: 16px;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-  border-radius: 4px;
-  text-decoration: none;
-}
-
-body.ged-poc main .default-content-wrapper p > a:only-child:hover {
-  background-color: #006c8a;
-  color: #fff;
+/* Inline default-content links are plain teal text links (matches the source —
+   e.g. the "FAQ" and "Click here" links sit inside sentences, not buttons).
+   Standalone CTA buttons live inside the hero/columns feature blocks, which
+   style their own links. */
+body.ged-poc main .default-content-wrapper p a {
+  color: #0084a9;
+  text-decoration: underline;
 }
