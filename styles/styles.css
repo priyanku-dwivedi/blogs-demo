@@ -365,6 +365,10 @@ main .section.highlight {
    removes html.dark on these pages; this pins GED surface + text colors. */
 body.ged-poc {
   background-color: #fff;
+
+  /* clear the 888poker dotted background pattern so the GED content area is a
+     clean white surface like the source site */
+  background-image: none;
   color: #303030;
   font-family: Roboto, system-ui, arial, sans-serif;
 }
