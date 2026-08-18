@@ -1,287 +1,221 @@
 {
-  "metadata": {
-    "projectType": "xwalk"
-  },
   "templates": [
     {
-      "name": "article",
+      "name": "hero-content-page",
       "urls": [
-        "https://www.888poker.com/magazine/jason-koon-poker-net-worth",
-        "https://www.888poker.com/magazine/chance-kornuth-poker-net-worth",
-        "https://www.888poker.com/magazine/sam-farha-poker-net-worth",
-        "https://www.888poker.com/magazine/bryn-kenney-poker-net-worth"
+        "https://www.ged.com/en",
+        "https://www.ged.com/en/about-test/social-studies.html",
+        "https://www.ged.com/en/accessibility-statement.html",
+        "https://www.ged.com/en/accommodations.html",
+        "https://www.ged.com/en/additional-resources/get-inspired.html",
+        "https://www.ged.com/en/additional-resources/social-media.html",
+        "https://www.ged.com/en/additional-resources/student-brochure.html",
+        "https://www.ged.com/en/additional-resources/video-guides.html",
+        "https://www.ged.com/en/additional-resources/webinars.html",
+        "https://www.ged.com/en/contact-us.html",
+        "https://www.ged.com/en/contactus.html",
+        "https://www.ged.com/en/curriculum.html",
+        "https://www.ged.com/en/curriculum/language-arts.html",
+        "https://www.ged.com/en/curriculum/math.html",
+        "https://www.ged.com/en/curriculum/science.html",
+        "https://www.ged.com/en/grads.html",
+        "https://www.ged.com/en/how-to-graduate.html",
+        "https://www.ged.com/en/how-to-graduate/online-classes.html",
+        "https://www.ged.com/en/how-to-graduate/practice-questions.html",
+        "https://www.ged.com/en/life-after-ged.html",
+        "https://www.ged.com/en/life-after-ged/grads.html",
+        "https://www.ged.com/en/prep-centers.html",
+        "https://www.ged.com/en/prep-centers/become-a-partner.html",
+        "https://www.ged.com/en/privacy-policy.html",
+        "https://www.ged.com/en/professional-development.html",
+        "https://www.ged.com/en/professional-development/become-a-partner.html",
+        "https://www.ged.com/en/professional-development/develop-student-skills.html",
+        "https://www.ged.com/en/professional-development/develop-student-skills/plds.html",
+        "https://www.ged.com/en/professional-development/free-classroom-materials.html",
+        "https://www.ged.com/en/professional-development/free-classroom-materials/extended-response.html",
+        "https://www.ged.com/en/professional-development/webinars.html",
+        "https://www.ged.com/en/success-story-submissions.html",
+        "https://www.ged.com/en/terms.html"
       ],
-      "representativeUrl": "https://www.888poker.com/magazine/jason-koon-poker-net-worth",
       "coverageGaps": [],
-      "description": "Poker blog article page: hero with title/date/reading-time/author, in-page table of contents, default-content rich body with inline video/social embeds, and an author bio.",
-      "blocks": [
-        {
-          "name": "article-hero",
-          "instances": [
-            ".region--content .grid-container-teaser"
-          ]
-        },
-        {
-          "name": "toc",
-          "instances": [
-            "#block-tocforcontentarticlebody",
-            ".block-table-of-contents"
-          ]
-        },
-        {
-          "name": "embed",
-          "instances": [
-            ".field--name-body iframe",
-            ".field--name-body blockquote.twitter-tweet"
-          ]
-        },
-        {
-          "name": "author-bio",
-          "instances": [
-            ".field--name-field-author",
-            ".author_details_full_block"
-          ]
-        }
-      ],
-      "sections": [
-        {
-          "id": "hero",
-          "name": "Article Hero",
-          "selector": [
-            ".region--content .grid-container-teaser"
-          ],
-          "style": null,
-          "blocks": [
-            "article-hero"
-          ],
-          "defaultContent": []
-        },
-        {
-          "id": "toc",
-          "name": "Table of Contents",
-          "selector": [
-            "#block-tocforcontentarticlebody",
-            ".block-table-of-contents"
-          ],
-          "style": "boxed",
-          "blocks": [
-            "toc"
-          ],
-          "defaultContent": []
-        },
-        {
-          "id": "body",
-          "name": "Article Body",
-          "selector": [
-            ".field--name-body.field--type-text-with-summary"
-          ],
-          "style": null,
-          "blocks": [
-            "embed"
-          ],
-          "defaultContent": [
-            ".field--name-body.field--type-text-with-summary"
-          ]
-        },
-        {
-          "id": "author",
-          "name": "Author Bio",
-          "selector": [
-            ".field--name-field-author",
-            ".author_details_full_block"
-          ],
-          "style": "light",
-          "blocks": [
-            "author-bio"
-          ],
-          "defaultContent": []
-        }
-      ]
+      "description": "Hero banner followed by mixed content sections (rich text, columns, cards, and accordions)",
+      "blocks": []
     },
     {
-      "name": "author",
+      "name": "carousel-landing-page",
       "urls": [
-        "https://www.888poker.com/magazine/author/frederico-pereira",
-        "https://www.888poker.com/magazine/author/hyacinth-swanson"
+        "https://www.ged.com/en/about-test.html",
+        "https://www.ged.com/en/study.html"
       ],
-      "representativeUrl": "https://www.888poker.com/magazine/author/frederico-pereira",
       "coverageGaps": [],
-      "description": "Author listing page: author-header identity banner (name, portrait, bio, social) followed by a query-driven article-list filtered by author with Load More.",
-      "blocks": [
-        {
-          "name": "author-header",
-          "instances": [
-            ".views-row > article.node--type-author"
-          ]
-        },
-        {
-          "name": "article-list",
-          "instances": [
-            ".view-articles.view-id-articles .view-content"
-          ]
-        }
-      ],
-      "sections": [
-        {
-          "id": "author-header",
-          "name": "Author Header",
-          "selector": [
-            ".views-row > article.node--type-author"
-          ],
-          "style": null,
-          "blocks": [
-            "author-header"
-          ],
-          "defaultContent": []
-        },
-        {
-          "id": "article-listing",
-          "name": "Article Listing",
-          "selector": [
-            ".view-articles.view-id-articles .view-content"
-          ],
-          "style": null,
-          "blocks": [
-            "article-list"
-          ],
-          "defaultContent": []
-        }
-      ]
+      "description": "Carousel-led page with columns, rich text sections, and a closing accordion",
+      "blocks": []
     },
     {
-      "name": "listing",
+      "name": "accordion-page",
       "urls": [
-        "https://www.888poker.com/magazine/poker-world",
-        "https://www.888poker.com/magazine/tags/wsop"
+        "https://www.ged.com/en/additional-resources.html",
+        "https://www.ged.com/en/faq.html",
+        "https://www.ged.com/en/faqs.html",
+        "https://www.ged.com/en/faqs/about-the-ged.html",
+        "https://www.ged.com/en/faqs/after-the-exam.html",
+        "https://www.ged.com/en/faqs/educators.html",
+        "https://www.ged.com/en/faqs/ged-test-fraud-en.html",
+        "https://www.ged.com/en/faqs/policies.html",
+        "https://www.ged.com/en/faqs/taking-the-exam.html",
+        "https://www.ged.com/en/faqs/test-retakes-en.html",
+        "https://www.ged.com/en/faqs/testing-accommodations.html",
+        "https://www.ged.com/en/faqs/understanding-test-scores.html",
+        "https://www.ged.com/en/faqs/what-to-expect-on-test-day.html",
+        "https://www.ged.com/en/policies/canada.html",
+        "https://www.ged.com/en/policies/japan.html"
       ],
-      "representativeUrl": "https://www.888poker.com/magazine/poker-world",
       "coverageGaps": [],
-      "description": "Category or tag listing page: category-header (term title + optional description) followed by a query-driven article-list filtered by category or tag with Load More.",
-      "blocks": [
-        {
-          "name": "category-header",
-          "instances": [
-            "#block-pagetitle"
-          ]
-        },
-        {
-          "name": "article-list",
-          "instances": [
-            ".view-display-id-page_category_articles .views-infinite-scroll-content-wrapper"
-          ]
-        }
-      ],
-      "sections": [
-        {
-          "id": "listing-header",
-          "name": "Listing Header",
-          "selector": [
-            "#block-pagetitle"
-          ],
-          "style": null,
-          "blocks": [
-            "category-header"
-          ],
-          "defaultContent": []
-        },
-        {
-          "id": "article-listing",
-          "name": "Article Listing",
-          "selector": [
-            ".view-display-id-page_category_articles .views-infinite-scroll-content-wrapper"
-          ],
-          "style": null,
-          "blocks": [
-            "article-list"
-          ],
-          "defaultContent": []
-        }
-      ]
+      "description": "Page composed mainly of accordion and column sections (expand/collapse Q&A layout)",
+      "blocks": []
     },
     {
-      "name": "home",
+      "name": "feature-landing-page",
       "urls": [
-        "https://www.888poker.com/magazine/"
+        "https://www.ged.com/en/gedcomplete.html",
+        "https://www.ged.com/en/how-to-graduate/ged-badges-intl.html",
+        "https://www.ged.com/en/how-to-graduate/ged-ready.html"
       ],
-      "representativeUrl": "https://www.888poker.com/magazine/",
       "coverageGaps": [],
-      "description": "Magazine landing page: page-title (default content), hand-curated featured-articles, category-nav, and a query-driven article-list (all categories, newest-first) with Load More.",
-      "blocks": [
-        {
-          "name": "featured-articles",
-          "instances": [
-            ".view-display-id-block_hp_headline"
-          ]
-        },
-        {
-          "name": "category-nav",
-          "instances": [
-            ".view-display-id-block_hp_categories_articles .view-filters"
-          ]
-        },
-        {
-          "name": "article-list",
-          "instances": [
-            ".view-display-id-block_hp_categories_articles .view-content"
-          ]
-        }
-      ],
-      "sections": [
-        {
-          "id": "featured",
-          "name": "Featured Articles",
-          "selector": [
-            ".view-display-id-block_hp_headline"
-          ],
-          "style": null,
-          "blocks": [
-            "featured-articles"
-          ],
-          "defaultContent": []
-        },
-        {
-          "id": "category-nav",
-          "name": "Category Nav",
-          "selector": [
-            ".view-display-id-block_hp_categories_articles .view-filters"
-          ],
-          "style": null,
-          "blocks": [
-            "category-nav"
-          ],
-          "defaultContent": []
-        },
-        {
-          "id": "latest",
-          "name": "Latest Articles",
-          "selector": [
-            ".view-display-id-block_hp_categories_articles .view-content"
-          ],
-          "style": null,
-          "blocks": [
-            "article-list"
-          ],
-          "defaultContent": []
-        }
-      ]
+      "description": "Hero with cards, an embedded form, media embed, columns, and a carousel",
+      "blocks": []
     },
     {
-      "name": "transcripts",
+      "name": "story-detail-page",
       "urls": [
-        "https://www.ged.com/transcripts/international.html"
+        "https://www.ged.com/en/graduatestories/aleena-thailand.html",
+        "https://www.ged.com/en/graduatestories/amy.html",
+        "https://www.ged.com/en/graduatestories/aneli.html",
+        "https://www.ged.com/en/graduatestories/athitaya.html",
+        "https://www.ged.com/en/graduatestories/atom-2.html",
+        "https://www.ged.com/en/graduatestories/azmain.html",
+        "https://www.ged.com/en/graduatestories/berdine.html",
+        "https://www.ged.com/en/graduatestories/bhanuvit.html",
+        "https://www.ged.com/en/graduatestories/bikash.html",
+        "https://www.ged.com/en/graduatestories/bonus.html",
+        "https://www.ged.com/en/graduatestories/bosshy.html",
+        "https://www.ged.com/en/graduatestories/catherine-south-africa.html",
+        "https://www.ged.com/en/graduatestories/channawit.html",
+        "https://www.ged.com/en/graduatestories/chatchapol.html",
+        "https://www.ged.com/en/graduatestories/chayanon.html",
+        "https://www.ged.com/en/graduatestories/cherise.html",
+        "https://www.ged.com/en/graduatestories/cindy.html",
+        "https://www.ged.com/en/graduatestories/damian.html",
+        "https://www.ged.com/en/graduatestories/emika.html",
+        "https://www.ged.com/en/graduatestories/fazle.html",
+        "https://www.ged.com/en/graduatestories/gavin.html",
+        "https://www.ged.com/en/graduatestories/gazi.html",
+        "https://www.ged.com/en/graduatestories/iris.html",
+        "https://www.ged.com/en/graduatestories/isabel.html",
+        "https://www.ged.com/en/graduatestories/jabir.html",
+        "https://www.ged.com/en/graduatestories/jeff.html",
+        "https://www.ged.com/en/graduatestories/jesseca.html",
+        "https://www.ged.com/en/graduatestories/jessie.html",
+        "https://www.ged.com/en/graduatestories/joriana.html",
+        "https://www.ged.com/en/graduatestories/josh.html",
+        "https://www.ged.com/en/graduatestories/julien.html",
+        "https://www.ged.com/en/graduatestories/karlene.html",
+        "https://www.ged.com/en/graduatestories/kochakorn.html",
+        "https://www.ged.com/en/graduatestories/leah.html",
+        "https://www.ged.com/en/graduatestories/leela.html",
+        "https://www.ged.com/en/graduatestories/maham.html",
+        "https://www.ged.com/en/graduatestories/mahdi.html",
+        "https://www.ged.com/en/graduatestories/marelize.html",
+        "https://www.ged.com/en/graduatestories/marie.html",
+        "https://www.ged.com/en/graduatestories/marijke.html",
+        "https://www.ged.com/en/graduatestories/messanee.html",
+        "https://www.ged.com/en/graduatestories/minhal.html",
+        "https://www.ged.com/en/graduatestories/moht-moht.html",
+        "https://www.ged.com/en/graduatestories/myat-pan.html",
+        "https://www.ged.com/en/graduatestories/nawarat.html",
+        "https://www.ged.com/en/graduatestories/neel.html",
+        "https://www.ged.com/en/graduatestories/oat.html",
+        "https://www.ged.com/en/graduatestories/omar.html",
+        "https://www.ged.com/en/graduatestories/pachara.html",
+        "https://www.ged.com/en/graduatestories/phiyachon.html",
+        "https://www.ged.com/en/graduatestories/pichyapa.html",
+        "https://www.ged.com/en/graduatestories/porawee.html",
+        "https://www.ged.com/en/graduatestories/pranjol.html",
+        "https://www.ged.com/en/graduatestories/prince.html",
+        "https://www.ged.com/en/graduatestories/rain.html",
+        "https://www.ged.com/en/graduatestories/ramida.html",
+        "https://www.ged.com/en/graduatestories/raqeeb.html",
+        "https://www.ged.com/en/graduatestories/reolan-jaden.html",
+        "https://www.ged.com/en/graduatestories/sasikanchaya.html",
+        "https://www.ged.com/en/graduatestories/sharif.html",
+        "https://www.ged.com/en/graduatestories/sittara.html",
+        "https://www.ged.com/en/graduatestories/solaiman.html",
+        "https://www.ged.com/en/graduatestories/solomon-israel.html",
+        "https://www.ged.com/en/graduatestories/su-yadanar.html",
+        "https://www.ged.com/en/graduatestories/tanvir.html",
+        "https://www.ged.com/en/graduatestories/tina.html",
+        "https://www.ged.com/en/graduatestories/trinh.html",
+        "https://www.ged.com/en/graduatestories/tshegofatso.html",
+        "https://www.ged.com/en/graduatestories/vincenzo.html",
+        "https://www.ged.com/en/graduatestories/warren.html",
+        "https://www.ged.com/en/graduatestories/wesley.html",
+        "https://www.ged.com/en/graduatestories/wilna.html",
+        "https://www.ged.com/en/graduatestories/yeakub.html",
+        "https://www.ged.com/en/graduatestories/zanel.html"
       ],
-      "representativeUrl": "https://www.ged.com/transcripts/international.html",
       "coverageGaps": [],
-      "description": "GED \"Request Transcripts\" page: an H1 + subheading followed by a set of year-range option cards (each a single link) that route to the right transcript-request destination.",
-      "blocks": [
-        {
-          "name": "ged-cards",
-          "instances": [
-            "section.column-control:has(a h3)"
-          ]
-        }
+      "description": "Hero-led detail page with an optional single columns content section",
+      "blocks": []
+    },
+    {
+      "name": "form-page",
+      "urls": [
+        "https://www.ged.com/en/how-to-graduate/ged-ready/choose-your-ged-ready-subject.html",
+        "https://www.ged.com/en/test-previews.html"
       ],
-      "sections": []
+      "coverageGaps": [],
+      "description": "Minimal form-centric page with little to no other content blocks",
+      "blocks": []
+    },
+    {
+      "name": "tabbed-accordion-page",
+      "urls": [
+        "https://www.ged.com/en/policies/bangladesh.html",
+        "https://www.ged.com/en/policies/cameroon.html",
+        "https://www.ged.com/en/policies/guyana.html",
+        "https://www.ged.com/en/policies/india.html",
+        "https://www.ged.com/en/policies/kenya.html",
+        "https://www.ged.com/en/policies/malaysia.html",
+        "https://www.ged.com/en/policies/myanmar.html",
+        "https://www.ged.com/en/policies/namibia.html",
+        "https://www.ged.com/en/policies/other.html",
+        "https://www.ged.com/en/policies/pakistan.html",
+        "https://www.ged.com/en/policies/south-africa.html",
+        "https://www.ged.com/en/policies/thailand.html",
+        "https://www.ged.com/en/policies/the-republic-of-korea.html",
+        "https://www.ged.com/en/submit-your-institution.html"
+      ],
+      "coverageGaps": [],
+      "description": "Tabs navigation with nested accordion content sections",
+      "blocks": []
+    },
+    {
+      "name": "tabs-page",
+      "urls": [
+        "https://www.ged.com/en/policies.html"
+      ],
+      "coverageGaps": [],
+      "description": "Single tabs block page used as a directory/index",
+      "blocks": []
+    },
+    {
+      "name": "search-page",
+      "urls": [
+        "https://www.ged.com/en/university-acceptance.html"
+      ],
+      "coverageGaps": [],
+      "description": "Search-driven page centered on a search block",
+      "blocks": []
     }
   ]
 }

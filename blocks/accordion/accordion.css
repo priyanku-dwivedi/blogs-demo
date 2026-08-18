@@ -80,3 +80,129 @@
   color: var(--ged-brand);
   text-decoration: underline;
 }
+
+/* Positivus "Process block" variant (from Figma). Each item is its own
+   rounded card with a hard offset shadow; the open item uses the lime accent,
+   a large step number precedes the title, and the toggle is a circular +/- on
+   the right. Enable by adding the "positivus" option to the block. */
+.accordion.positivus {
+  --pos-accent: #b9ff66;
+  --pos-dark: #191a23;
+  --pos-surface: #f3f3f3;
+
+  font-family: "Space Grotesk", system-ui, arial, sans-serif;
+  color: var(--pos-dark);
+  counter-reset: pos-step;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.accordion.positivus .accordion-item {
+  border: 1px solid var(--pos-dark);
+  border-radius: 45px;
+  background: var(--pos-surface);
+  box-shadow: 0 5px 0 var(--pos-dark);
+  padding: 20px 40px;
+  transition: background 0.2s ease;
+}
+
+.accordion.positivus .accordion-item[open] {
+  background: var(--pos-accent);
+}
+
+.accordion.positivus .accordion-item-title {
+  padding: 20px 0;
+  font-family: "Space Grotesk", system-ui, arial, sans-serif;
+  font-size: 30px;
+  font-weight: 500;
+  color: var(--pos-dark);
+  counter-increment: pos-step;
+}
+
+/* large 01–06 step number before each title */
+.accordion.positivus .accordion-item-title::before {
+  content: counter(pos-step, decimal-leading-zero);
+  font-size: 60px;
+  font-weight: 500;
+  line-height: 1;
+  margin-right: 25px;
+}
+
+/* circular +/- toggle on the right */
+/* stylelint-disable-next-line no-descending-specificity */
+.accordion.positivus .accordion-item-marker {
+  width: 58px;
+  height: 58px;
+  border: 1px solid var(--pos-dark);
+  border-radius: 50%;
+  background-color: #fff;
+  mask: none;
+  position: relative;
+  transition: none;
+}
+
+.accordion.positivus .accordion-item-marker::before,
+.accordion.positivus .accordion-item-marker::after {
+  content: "";
+  position: absolute;
+  inset: 50% 25% auto;
+  height: 2.5px;
+  background: var(--pos-dark);
+  transform: translateY(-50%);
+}
+
+/* vertical bar makes a "+"; hidden when open to leave a "-" */
+.accordion.positivus .accordion-item-marker::after {
+  transform: translateY(-50%) rotate(90deg);
+}
+
+.accordion.positivus .accordion-item[open] .accordion-item-marker {
+  transform: none;
+}
+
+.accordion.positivus .accordion-item[open] .accordion-item-marker::after {
+  opacity: 0;
+}
+
+/* divider between title and body, matching the Figma card */
+.accordion.positivus .accordion-item-body {
+  padding: 0;
+  border-top: 1px solid var(--pos-dark);
+  margin-top: 4px;
+  padding-top: 30px;
+  font-family: "Space Grotesk", system-ui, arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--pos-dark);
+}
+
+.accordion.positivus .accordion-item-body a {
+  color: var(--pos-dark);
+}
+
+@media (width <= 600px) {
+  .accordion.positivus .accordion-item {
+    border-radius: 26px;
+    padding: 12px 20px;
+  }
+
+  .accordion.positivus .accordion-item-title {
+    font-size: 20px;
+  }
+
+  .accordion.positivus .accordion-item-title::before {
+    font-size: 34px;
+    margin-right: 14px;
+  }
+
+  .accordion.positivus .accordion-item-marker {
+    width: 40px;
+    height: 40px;
+  }
+}

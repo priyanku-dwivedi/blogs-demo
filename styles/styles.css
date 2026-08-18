@@ -413,3 +413,52 @@ body.ged-poc main .default-content-wrapper p a {
   color: #0084a9;
   text-decoration: underline;
 }
+
+/* Positivus (Figma) theme — scoped to the figma-home page only. Design tokens
+   extracted from the Positivus Landing Page Figma file. Isolated from the
+   888poker + GED themes so existing pages are safe. */
+body.figma-home {
+  --pos-accent: #b9ff66;
+  --pos-dark: #191a23;
+  --pos-surface: #f3f3f3;
+  --pos-white: #fff;
+
+  background-color: var(--pos-white);
+  background-image: none;
+  color: var(--pos-dark);
+  font-family: "Space Grotesk", system-ui, arial, sans-serif;
+}
+
+/* stylelint-disable no-descending-specificity */
+body.figma-home main h1,
+body.figma-home main h2,
+body.figma-home main h3 {
+  font-family: "Space Grotesk", system-ui, arial, sans-serif;
+  color: var(--pos-dark);
+  font-weight: 500;
+}
+
+body.figma-home main h1 {
+  font-size: clamp(40px, 5vw, 60px);
+  line-height: 1.1;
+}
+
+body.figma-home main h2 {
+  font-size: clamp(30px, 3.4vw, 40px);
+  line-height: 1.2;
+}
+/* stylelint-enable no-descending-specificity */
+
+/* A section heading pill uses the lime accent, per the Positivus system. */
+body.figma-home main .default-content-wrapper h2 mark,
+body.figma-home main .default-content-wrapper .highlight {
+  background: var(--pos-accent);
+  border-radius: 7px;
+  padding: 0 7px;
+}
+
+body.figma-home main .default-content-wrapper p {
+  font-size: 18px;
+  line-height: 1.5;
+  max-width: 900px;
+}

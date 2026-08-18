@@ -6,7 +6,10 @@
       "aemSitePath": "/content/blogs-888",
       "aemAssetsFolderPath": "/content/dam/blogs-888",
       "aemSiteName": "blogs-888",
-      "aemSiteTitle": "Blogs Site Demo"
+      "aemSiteTitle": "Blogs Site Demo",
+      "contentHostUrl": "author-p50156-e1509324.adobeaemcloud.com",
+      "baseUrl": "https://www.ged.com/",
+      "libraryUrl": "https://main--aem-block-collection--adobe.aem.page/tools/sidekick/library.json"
     }
   }
 }
