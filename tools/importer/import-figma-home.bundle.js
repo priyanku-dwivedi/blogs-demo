@@ -1,26 +1,9 @@
 /* eslint-disable */
 var CustomImportScript = (() => {
   var __defProp = Object.defineProperty;
-  var __defProps = Object.defineProperties;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-  var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
   var __getOwnPropNames = Object.getOwnPropertyNames;
-  var __getOwnPropSymbols = Object.getOwnPropertySymbols;
   var __hasOwnProp = Object.prototype.hasOwnProperty;
-  var __propIsEnum = Object.prototype.propertyIsEnumerable;
-  var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-  var __spreadValues = (a, b) => {
-    for (var prop in b || (b = {}))
-      if (__hasOwnProp.call(b, prop))
-        __defNormalProp(a, prop, b[prop]);
-    if (__getOwnPropSymbols)
-      for (var prop of __getOwnPropSymbols(b)) {
-        if (__propIsEnum.call(b, prop))
-          __defNormalProp(a, prop, b[prop]);
-      }
-    return a;
-  };
-  var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
   var __export = (target, all) => {
     for (var name in all)
       __defProp(target, name, { get: all[name], enumerable: true });
@@ -40,219 +23,88 @@ var CustomImportScript = (() => {
   __export(import_figma_home_exports, {
     default: () => import_figma_home_default
   });
-
-  // tools/importer/parsers/ged-hero.js
-  function parse(element, { document }) {
-    const h1 = element.querySelector("h1");
-    if (!h1) {
-      return;
+  var PAGE_TEMPLATE = {
+    name: "figma-home",
+    description: 'Positivus (Figma) Process block, populated with the live GED "How to earn your GED certificate" steps.',
+    urls: ["https://www.ged.com/en/"],
+    blocks: [{ name: "accordion", instances: ["main"] }],
+    sections: []
+  };
+  var STEP_HINTS = [
+    {
+      hint: "Take a class",
+      title: "Take a class or study on your own",
+      body: "Take a class or study on your own.",
+      linkText: "Find a prep center",
+      linkHref: "https://www.ged.com/en/prep-centers.html"
+    },
+    {
+      hint: "practice test",
+      title: "Take the official practice test online",
+      body: "Take the official practice test online.",
+      linkText: "Learn more",
+      linkHref: "https://www.ged.com/en/how-to-graduate/ged-ready.html"
+    },
+    {
+      hint: "Schedule and sit",
+      title: "Schedule and sit for your exams",
+      body: "Schedule and sit for your exams.",
+      linkText: "Log in to schedule",
+      linkHref: "https://app.ged.com/login?language=ENU&locale=OC"
+    },
+    {
+      hint: "Pass all 4",
+      title: "Pass all 4 exams and get your transcript",
+      body: "Pass all 4 exams and get your transcript.",
+      linkText: "Request your transcript",
+      linkHref: "https://www.ged.com/transcripts/international.html"
     }
-    const sub = [...element.querySelectorAll("p")].find((p) => !p.querySelector("a") && p.textContent.trim());
-    const cta = element.querySelector("a[href]");
-    const cell = document.createElement("div");
-    const heading = document.createElement("h1");
-    heading.textContent = h1.textContent.replace(/\s+/g, " ").trim();
-    cell.appendChild(heading);
-    if (sub) {
-      const p = document.createElement("p");
-      p.textContent = sub.textContent.replace(/\s+/g, " ").trim();
-      cell.appendChild(p);
-    }
-    if (cta) {
-      const p = document.createElement("p");
-      const a = document.createElement("a");
-      a.setAttribute("href", cta.getAttribute("href"));
-      a.textContent = cta.textContent.replace(/\s+/g, " ").trim();
-      p.appendChild(a);
-      cell.appendChild(p);
-    }
-    const block = WebImporter.Blocks.createBlock(document, {
-      name: "hero (ged-hero)",
-      cells: [[cell]]
-    });
-    element.replaceWith(block);
-  }
-
-  // tools/importer/parsers/figma-steps.js
-  var STEPS = [
-    { hint: "Take a class", title: "Take a class or study on your own" },
-    { hint: "Take the official", title: "Take the official GED Ready practice test" },
-    { hint: "Schedule and sit", title: "Schedule and sit for the exam" },
-    { hint: "Pass all 4", title: "Pass all 4 subject tests" }
   ];
-  function parse2(element, { document }) {
+  function extractSteps(document) {
+    const scope = document.querySelector("main") || document.body;
+    const paras = [...scope.querySelectorAll("p")];
     const rows = [];
-    STEPS.forEach(({ hint, title }) => {
-      const desc = [...element.querySelectorAll("p")].find((p) => p.textContent.includes(hint));
-      if (!desc) return;
+    STEP_HINTS.forEach((step) => {
+      const desc = paras.find((p) => p.textContent.includes(step.hint));
+      let bodyText = step.body;
+      let linkText = step.linkText;
+      let linkHref = step.linkHref;
+      if (desc) {
+        bodyText = desc.textContent.replace(/\s+/g, " ").trim();
+        let item = desc.parentElement;
+        for (let i = 0; i < 3 && item; i += 1) {
+          if (item.querySelector("a[href]")) break;
+          item = item.parentElement;
+        }
+        const link = item ? item.querySelector("a[href]") : null;
+        if (link) {
+          linkText = link.textContent.replace(/\s+/g, " ").trim();
+          linkHref = link.getAttribute("href");
+        }
+      }
       const titleCell = document.createElement("div");
       const t = document.createElement("p");
-      t.textContent = title;
+      t.textContent = step.title;
       titleCell.appendChild(t);
       const bodyCell = document.createElement("div");
       const b = document.createElement("p");
-      b.textContent = desc.textContent.replace(/\s+/g, " ").trim();
+      b.textContent = bodyText;
       bodyCell.appendChild(b);
-      rows.push([titleCell, bodyCell]);
-    });
-    if (rows.length === 0) {
-      return;
-    }
-    const block = WebImporter.Blocks.createBlock(document, {
-      name: "accordion (positivus)",
-      cells: rows
-    });
-    element.replaceWith(block);
-  }
-
-  // tools/importer/parsers/ged-stories.js
-  function parse3(element, { document }) {
-    const h3s = [...element.querySelectorAll("h3")];
-    if (h3s.length === 0) {
-      return;
-    }
-    const rows = h3s.map((h3) => {
-      const wrap = h3.closest("div");
-      const quote = wrap ? [...wrap.querySelectorAll("p")].find((p) => !p.querySelector("a")) : null;
-      const storyLink = wrap ? [...wrap.querySelectorAll("a[href]")].pop() : null;
-      const cell = document.createElement("div");
-      const heading = document.createElement("h3");
-      heading.textContent = h3.textContent.replace(/\s+/g, " ").trim();
-      cell.appendChild(heading);
-      if (quote) {
-        const p = document.createElement("p");
-        p.textContent = quote.textContent.replace(/\s+/g, " ").trim();
-        cell.appendChild(p);
-      }
-      if (storyLink) {
+      if (linkHref) {
         const lp = document.createElement("p");
         const a = document.createElement("a");
-        a.setAttribute("href", storyLink.getAttribute("href"));
-        a.textContent = storyLink.textContent.replace(/\s+/g, " ").trim() || "View Story";
+        a.setAttribute("href", linkHref);
+        a.textContent = linkText || "Learn more";
         lp.appendChild(a);
-        cell.appendChild(lp);
+        bodyCell.appendChild(lp);
       }
-      return [cell];
+      rows.push([titleCell, bodyCell]);
     });
-    const block = WebImporter.Blocks.createBlock(document, {
-      name: "cards (ged-story)",
-      cells: rows
-    });
-    element.replaceWith(block);
-  }
-
-  // tools/importer/parsers/ged-cta.js
-  function parse4(element, { document }) {
-    const h2 = element.querySelector("h2");
-    if (!h2) {
-      return;
-    }
-    const cta = element.querySelector("a[href]");
-    const cell = document.createElement("div");
-    const heading = document.createElement("h2");
-    heading.textContent = h2.textContent.replace(/\s+/g, " ").trim();
-    cell.appendChild(heading);
-    if (cta) {
-      const p = document.createElement("p");
-      const a = document.createElement("a");
-      a.setAttribute("href", cta.getAttribute("href"));
-      a.textContent = cta.textContent.replace(/\s+/g, " ").trim();
-      p.appendChild(a);
-      cell.appendChild(p);
-    }
-    const block = WebImporter.Blocks.createBlock(document, {
-      name: "hero (ged-cta)",
-      cells: [[cell]]
-    });
-    element.replaceWith(block);
-  }
-
-  // tools/importer/transformers/ged-cleanup.js
-  var TransformHook = { beforeTransform: "beforeTransform", afterTransform: "afterTransform" };
-  function transform(hookName, element, payload) {
-    if (hookName === TransformHook.beforeTransform) {
-      WebImporter.DOMUtils.remove(element, [
-        "#onetrust-banner-sdk",
-        "#onetrust-consent-sdk",
-        ".cookie",
-        '[role="dialog"]'
-      ]);
-    }
-    if (hookName === TransformHook.afterTransform) {
-      WebImporter.DOMUtils.remove(element, [
-        "header",
-        "nav",
-        "footer"
-      ]);
-      WebImporter.DOMUtils.remove(element, [
-        'a[href="#main-content-starts"]',
-        // skip-to-content link
-        ".to-top-button",
-        // back-to-top control
-        "a.to-top-button",
-        "#arklex-chat-widget",
-        // chat bot
-        '[id*="chat"]'
-        // chat widget stragglers
-      ]);
-      WebImporter.DOMUtils.remove(element, [
-        "iframe",
-        "noscript",
-        "script",
-        "style",
-        "link"
-      ]);
-    }
-  }
-
-  // tools/importer/import-figma-home.js
-  var PAGE_TEMPLATE = {
-    name: "figma-home",
-    description: "GED home content styled with the Positivus (Figma) design system: hero, feature sections, a step/process accordion (Positivus variant), graduate-story teaser cards, and a closing sign-up CTA band.",
-    urls: [
-      "https://www.ged.com/en/"
-    ],
-    blocks: [
-      { name: "ged-hero", instances: ["main .column-control.flex-layout--vertically-centered"] },
-      { name: "figma-steps", instances: ["main .row:has(p)"] },
-      { name: "ged-stories", instances: ["main .row:has(h3)"] },
-      { name: "ged-cta", instances: ["main .column-control.bgcolor--background-dark"] }
-    ],
-    sections: []
-  };
-  var parsers = {
-    "ged-hero": parse,
-    "figma-steps": parse2,
-    "ged-stories": parse3,
-    "ged-cta": parse4
-  };
-  var transformers = [transform];
-  function executeTransformers(hookName, element, payload) {
-    const enhancedPayload = __spreadProps(__spreadValues({}, payload), { template: PAGE_TEMPLATE });
-    transformers.forEach((transformerFn) => {
-      try {
-        transformerFn.call(null, hookName, element, enhancedPayload);
-      } catch (e) {
-        console.error(`Transformer failed at ${hookName}:`, e);
-      }
-    });
-  }
-  function findBlocksOnPage(document) {
-    const found = [];
-    const hero = document.querySelector("main .column-control.flex-layout--vertically-centered");
-    if (hero) found.push({ name: "ged-hero", element: hero });
-    const stepsRow = [...document.querySelectorAll("main .row")].find((row) => [...row.querySelectorAll("p")].some((p) => /Take a class|Pass all 4 exams/.test(p.textContent)));
-    if (stepsRow) found.push({ name: "figma-steps", element: stepsRow });
-    const storiesRow = [...document.querySelectorAll("main .row")].find((row) => row.querySelectorAll("h3").length >= 2 && /Atom|Bonus|Bosshy/.test(row.textContent));
-    if (storiesRow) found.push({ name: "ged-stories", element: storiesRow });
-    const cta = [...document.querySelectorAll("main .column-control.bgcolor--background-dark")].find((s) => s.querySelector("h2") && /Join the millions/.test(s.textContent));
-    if (cta) found.push({ name: "ged-cta", element: cta });
-    console.log(`Found ${found.length} block instances on page`);
-    return found;
+    return rows;
   }
   function appendGedMetadata(main, document) {
     const cells = [
-      ["Title", "Home \u2014 GED (Figma / Positivus)"],
+      ["Title", "How to earn your GED \u2014 Positivus (Figma)"],
       ["Description", "The GED is the #1 most recognized higher secondary certificate worldwide, accepted by universities in over 100 countries."],
       ["Template", "figma-home"],
       ["Nav", "/ged-pages/nav"],
@@ -263,27 +115,20 @@ var CustomImportScript = (() => {
   }
   var import_figma_home_default = {
     transform: (payload) => {
-      const {
-        document,
-        url,
-        html,
-        params
-      } = payload;
-      const main = document.body;
-      executeTransformers("beforeTransform", main, payload);
-      const pageBlocks = findBlocksOnPage(document);
-      pageBlocks.forEach((block) => {
-        if (!block.element.parentNode) return;
-        const parser = parsers[block.name];
-        try {
-          parser(block.element, { document, url, params });
-        } catch (e) {
-          console.error(`Failed to parse ${block.name}:`, e);
-        }
-      });
-      executeTransformers("afterTransform", main, payload);
-      WebImporter.rules.transformBackgroundImages(main, document);
-      WebImporter.rules.adjustImageUrls(main, url, params.originalURL);
+      const { document } = payload;
+      const main = document.createElement("div");
+      const liveHeading = [...document.querySelectorAll("main h2, main h1")].find((h) => /How to earn/i.test(h.textContent));
+      const h2 = document.createElement("h2");
+      h2.textContent = liveHeading ? liveHeading.textContent.trim() : "How to earn your GED certificate";
+      main.appendChild(h2);
+      const rows = extractSteps(document);
+      if (rows.length) {
+        const block = WebImporter.Blocks.createBlock(document, {
+          name: "accordion (positivus)",
+          cells: rows
+        });
+        main.appendChild(block);
+      }
       const hr = document.createElement("hr");
       main.appendChild(hr);
       appendGedMetadata(main, document);
@@ -294,7 +139,8 @@ var CustomImportScript = (() => {
         report: {
           title: document.title,
           template: PAGE_TEMPLATE.name,
-          blocks: pageBlocks.map((b) => b.name)
+          blocks: ["accordion (positivus)"],
+          stepCount: rows.length
         }
       }];
     }

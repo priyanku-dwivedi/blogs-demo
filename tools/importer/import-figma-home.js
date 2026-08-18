@@ -1,96 +1,107 @@
 /* eslint-disable */
 /* global WebImporter */
 
-// PARSER IMPORTS
-import gedHeroParser from './parsers/ged-hero.js';
-import figmaStepsParser from './parsers/figma-steps.js';
-import gedStoriesParser from './parsers/ged-stories.js';
-import gedCtaParser from './parsers/ged-cta.js';
-
-// TRANSFORMER IMPORTS
-import cleanupTransformer from './transformers/ged-cleanup.js';
-
 // PAGE TEMPLATE CONFIGURATION
-// figma-home: same live GED home content as home-ged, but rendered with the
-// Positivus (Figma) design system. The page sets Template=figma-home so the
-// scoped body.figma-home theme (Positivus tokens + Space Grotesk) applies, and
-// the "How to earn" steps render via the Positivus accordion variant.
+// figma-home showcases the Positivus (Figma) "Process block". It takes the live
+// GED home "How to earn your GED certificate" steps and renders them as the
+// Positivus accordion variant, on a clean page using the figma-home theme.
 const PAGE_TEMPLATE = {
   name: 'figma-home',
-  description: 'GED home content styled with the Positivus (Figma) design system: hero, feature sections, a step/process accordion (Positivus variant), graduate-story teaser cards, and a closing sign-up CTA band.',
-  urls: [
-    'https://www.ged.com/en/',
-  ],
-  blocks: [
-    { name: 'ged-hero', instances: ['main .column-control.flex-layout--vertically-centered'] },
-    { name: 'figma-steps', instances: ['main .row:has(p)'] },
-    { name: 'ged-stories', instances: ['main .row:has(h3)'] },
-    { name: 'ged-cta', instances: ['main .column-control.bgcolor--background-dark'] },
-  ],
+  description: 'Positivus (Figma) Process block, populated with the live GED "How to earn your GED certificate" steps.',
+  urls: ['https://www.ged.com/en/'],
+  blocks: [{ name: 'accordion', instances: ['main'] }],
   sections: [],
 };
 
-// PARSER REGISTRY
-const parsers = {
-  'ged-hero': gedHeroParser,
-  'figma-steps': figmaStepsParser,
-  'ged-stories': gedStoriesParser,
-  'ged-cta': gedCtaParser,
-};
+// The four GED "how to earn" steps. `hint` matches the live DOM so we prefer
+// the source's own copy/links; `title`/`body`/`link` are verified fallbacks
+// (captured from https://www.ged.com/en) used when the client-rendered step
+// text isn't present at transform time.
+const STEP_HINTS = [
+  {
+    hint: 'Take a class',
+    title: 'Take a class or study on your own',
+    body: 'Take a class or study on your own.',
+    linkText: 'Find a prep center',
+    linkHref: 'https://www.ged.com/en/prep-centers.html',
+  },
+  {
+    hint: 'practice test',
+    title: 'Take the official practice test online',
+    body: 'Take the official practice test online.',
+    linkText: 'Learn more',
+    linkHref: 'https://www.ged.com/en/how-to-graduate/ged-ready.html',
+  },
+  {
+    hint: 'Schedule and sit',
+    title: 'Schedule and sit for your exams',
+    body: 'Schedule and sit for your exams.',
+    linkText: 'Log in to schedule',
+    linkHref: 'https://app.ged.com/login?language=ENU&locale=OC',
+  },
+  {
+    hint: 'Pass all 4',
+    title: 'Pass all 4 exams and get your transcript',
+    body: 'Pass all 4 exams and get your transcript.',
+    linkText: 'Request your transcript',
+    linkHref: 'https://www.ged.com/transcripts/international.html',
+  },
+];
 
-const transformers = [cleanupTransformer];
+/** Build the accordion rows, preferring live DOM copy/links, else fallbacks. */
+function extractSteps(document) {
+  const scope = document.querySelector('main') || document.body;
+  const paras = [...scope.querySelectorAll('p')];
+  const rows = [];
 
-function executeTransformers(hookName, element, payload) {
-  const enhancedPayload = { ...payload, template: PAGE_TEMPLATE };
-  transformers.forEach((transformerFn) => {
-    try {
-      transformerFn.call(null, hookName, element, enhancedPayload);
-    } catch (e) {
-      console.error(`Transformer failed at ${hookName}:`, e);
+  STEP_HINTS.forEach((step) => {
+    const desc = paras.find((p) => p.textContent.includes(step.hint));
+
+    // resolve body text + link (live when available, else verified fallback)
+    let bodyText = step.body;
+    let linkText = step.linkText;
+    let linkHref = step.linkHref;
+    if (desc) {
+      bodyText = desc.textContent.replace(/\s+/g, ' ').trim();
+      let item = desc.parentElement;
+      for (let i = 0; i < 3 && item; i += 1) {
+        if (item.querySelector('a[href]')) break;
+        item = item.parentElement;
+      }
+      const link = item ? item.querySelector('a[href]') : null;
+      if (link) {
+        linkText = link.textContent.replace(/\s+/g, ' ').trim();
+        linkHref = link.getAttribute('href');
+      }
     }
+
+    const titleCell = document.createElement('div');
+    const t = document.createElement('p');
+    t.textContent = step.title;
+    titleCell.appendChild(t);
+
+    const bodyCell = document.createElement('div');
+    const b = document.createElement('p');
+    b.textContent = bodyText;
+    bodyCell.appendChild(b);
+    if (linkHref) {
+      const lp = document.createElement('p');
+      const a = document.createElement('a');
+      a.setAttribute('href', linkHref);
+      a.textContent = linkText || 'Learn more';
+      lp.appendChild(a);
+      bodyCell.appendChild(lp);
+    }
+
+    rows.push([titleCell, bodyCell]);
   });
+
+  return rows;
 }
 
-/**
- * Find the FIRST element for each block, in a fixed order. ged-steps and
- * ged-stories both match `.row`, so we resolve them explicitly: the row that
- * contains the step descriptions is steps; the row that contains <h3> names is
- * stories.
- */
-function findBlocksOnPage(document) {
-  const found = [];
-
-  const hero = document.querySelector('main .column-control.flex-layout--vertically-centered');
-  if (hero) found.push({ name: 'ged-hero', element: hero });
-
-  // steps: the .row whose paragraphs include the step hints
-  const stepsRow = [...document.querySelectorAll('main .row')].find((row) => (
-    [...row.querySelectorAll('p')].some((p) => /Take a class|Pass all 4 exams/.test(p.textContent))
-  ));
-  if (stepsRow) found.push({ name: 'figma-steps', element: stepsRow });
-
-  // stories: the .row that holds the graduate <h3> names
-  const storiesRow = [...document.querySelectorAll('main .row')].find((row) => (
-    row.querySelectorAll('h3').length >= 2 && /Atom|Bonus|Bosshy/.test(row.textContent)
-  ));
-  if (storiesRow) found.push({ name: 'ged-stories', element: storiesRow });
-
-  const cta = [...document.querySelectorAll('main .column-control.bgcolor--background-dark')].find((s) => (
-    s.querySelector('h2') && /Join the millions/.test(s.textContent)
-  ));
-  if (cta) found.push({ name: 'ged-cta', element: cta });
-
-  console.log(`Found ${found.length} block instances on page`);
-  return found;
-}
-
-/**
- * figma-home metadata block. Template=figma-home activates the scoped Positivus
- * theme in styles/styles.css; nav/footer reuse the existing ged-pages fragments.
- */
 function appendGedMetadata(main, document) {
   const cells = [
-    ['Title', 'Home — GED (Figma / Positivus)'],
+    ['Title', 'How to earn your GED — Positivus (Figma)'],
     ['Description', 'The GED is the #1 most recognized higher secondary certificate worldwide, accepted by universities in over 100 countries.'],
     ['Template', 'figma-home'],
     ['Nav', '/ged-pages/nav'],
@@ -102,29 +113,25 @@ function appendGedMetadata(main, document) {
 
 export default {
   transform: (payload) => {
-    const {
-      document, url, html, params,
-    } = payload;
+    const { document } = payload;
 
-    const main = document.body;
+    // Fresh, clean page body — only the heading + Positivus Process block.
+    const main = document.createElement('div');
 
-    executeTransformers('beforeTransform', main, payload);
+    const liveHeading = [...document.querySelectorAll('main h2, main h1')]
+      .find((h) => /How to earn/i.test(h.textContent));
+    const h2 = document.createElement('h2');
+    h2.textContent = liveHeading ? liveHeading.textContent.trim() : 'How to earn your GED certificate';
+    main.appendChild(h2);
 
-    const pageBlocks = findBlocksOnPage(document);
-    pageBlocks.forEach((block) => {
-      if (!block.element.parentNode) return;
-      const parser = parsers[block.name];
-      try {
-        parser(block.element, { document, url, params });
-      } catch (e) {
-        console.error(`Failed to parse ${block.name}:`, e);
-      }
-    });
-
-    executeTransformers('afterTransform', main, payload);
-
-    WebImporter.rules.transformBackgroundImages(main, document);
-    WebImporter.rules.adjustImageUrls(main, url, params.originalURL);
+    const rows = extractSteps(document);
+    if (rows.length) {
+      const block = WebImporter.Blocks.createBlock(document, {
+        name: 'accordion (positivus)',
+        cells: rows,
+      });
+      main.appendChild(block);
+    }
 
     const hr = document.createElement('hr');
     main.appendChild(hr);
@@ -138,7 +145,8 @@ export default {
       report: {
         title: document.title,
         template: PAGE_TEMPLATE.name,
-        blocks: pageBlocks.map((b) => b.name),
+        blocks: ['accordion (positivus)'],
+        stepCount: rows.length,
       },
     }];
   },

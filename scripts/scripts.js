@@ -265,6 +265,15 @@ export function setTheme(theme) {
  */
 const SITE_SECTIONS = [
   {
+    // figma-home renders GED content with the Positivus (Figma) design system.
+    // Listed before the generic /ged-pages rule so this more specific path wins.
+    prefix: '/ged-pages/figma-home',
+    nav: '/ged-pages/nav',
+    footer: '/ged-pages/footer',
+    bodyClass: 'figma-home',
+    forceLightTheme: true,
+  },
+  {
     prefix: '/ged-pages',
     nav: '/ged-pages/nav',
     footer: '/ged-pages/footer',
@@ -277,10 +286,17 @@ const SITE_SECTIONS = [
 
 /**
  * Returns the site-section config whose prefix matches the given path, or null.
+ * On delivery the content root is stripped (e.g. /ged-pages/x), but the local
+ * dev server serves the un-stripped path (/content/blogs-888/ged-pages/x). To
+ * match in both, test the prefix at the start OR immediately after a content
+ * mount segment. SITE_SECTIONS is ordered most-specific-first, so the first
+ * match wins.
  * @param {string} [pathname] path to test (defaults to current location)
  */
 export function getSiteSection(pathname = window.location.pathname) {
-  return SITE_SECTIONS.find((s) => pathname.startsWith(s.prefix)) || null;
+  return SITE_SECTIONS.find(
+    (s) => pathname.startsWith(s.prefix) || pathname.includes(s.prefix),
+  ) || null;
 }
 
 /**
