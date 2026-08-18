@@ -27,6 +27,7 @@
           "value": "",
           "options": [
             { "name": "Default", "value": "" },
+            { "name": "Positivus (Figma)", "value": "positivus" },
             { "name": "GED Home (headline over photo)", "value": "ged-hero" },
             { "name": "GED CTA band", "value": "ged-cta" },
             { "name": "GED Story (portrait + quote)", "value": "ged-story" },

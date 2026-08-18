@@ -508,6 +508,10 @@
             "value": ""
           },
           {
+            "name": "Positivus (Figma)",
+            "value": "positivus"
+          },
+          {
             "name": "GED Steps (numbered)",
             "value": "ged-steps"
           },
@@ -699,6 +703,10 @@
           {
             "name": "Default",
             "value": ""
+          },
+          {
+            "name": "Positivus (Figma)",
+            "value": "positivus"
           },
           {
             "name": "GED Home (headline over photo)",

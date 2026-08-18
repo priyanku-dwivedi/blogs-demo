@@ -43,6 +43,7 @@
           "value": "",
           "options": [
             { "name": "Default", "value": "" },
+            { "name": "Positivus (Figma)", "value": "positivus" },
             { "name": "GED Steps (numbered)", "value": "ged-steps" },
             { "name": "GED Story teasers", "value": "ged-story" },
             { "name": "GED Options (year ranges)", "value": "ged-options" },

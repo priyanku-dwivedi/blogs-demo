@@ -228,3 +228,107 @@
   text-decoration: underline;
 }
 
+/* stylelint-disable no-descending-specificity */
+
+/* Positivus (Figma) services grid — 2-up cards with 45px radius, 1px dark
+   border, hard offset shadow, and alternating lime / grey / dark backgrounds.
+   Each card: a highlighted title, a "Learn more" link, and an illustration.
+   Additive; scoped to .cards.positivus. */
+.cards.positivus ul {
+  display: grid;
+  gap: 40px;
+  grid-template-columns: 1fr;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cards.positivus li {
+  --pos-accent: #b9ff66;
+  --pos-dark: #191a23;
+  --pos-surface: #f3f3f3;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 280px;
+  border: 1px solid var(--pos-dark);
+  border-radius: 45px;
+  box-shadow: 0 5px 0 var(--pos-dark);
+  background: var(--pos-surface);
+  padding: 50px;
+  font-family: "Space Grotesk", system-ui, arial, sans-serif;
+  color: var(--pos-dark);
+}
+
+/* alternating fills: 1 lime, 2 grey, 3 dark, repeating (Positivus rhythm) */
+.cards.positivus li:nth-child(3n + 1) { background: var(--pos-accent); }
+.cards.positivus li:nth-child(3n + 2) { background: var(--pos-surface); }
+
+.cards.positivus li:nth-child(3n) {
+  background: var(--pos-dark);
+  color: #fff;
+}
+
+.cards.positivus .cards-card-body h3,
+.cards.positivus .cards-card-body strong:first-child {
+  display: inline-block;
+  margin: 0 0 12px;
+  background: #fff;
+  border-radius: 7px;
+  padding: 0 7px;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.cards.positivus li:nth-child(3n) .cards-card-body h3,
+.cards.positivus li:nth-child(3n) .cards-card-body strong:first-child {
+  background: var(--pos-accent);
+  color: var(--pos-dark);
+}
+
+.cards.positivus .cards-card-body a {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  color: inherit;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.cards.positivus .cards-card-body a::before {
+  content: "";
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--pos-dark) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H9M17 7v8"/></svg>') center / 22px no-repeat;
+  flex: 0 0 auto;
+}
+
+.cards.positivus li:nth-child(3n) .cards-card-body a::before {
+  background-color: var(--pos-accent);
+}
+
+.cards.positivus .cards-card-image img {
+  border-radius: 0;
+  max-width: 180px;
+  height: auto;
+}
+
+@media (width >= 900px) {
+  .cards.positivus ul {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cards.positivus li {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .cards.positivus .cards-card-body { flex: 1; }
+}
+
+/* stylelint-enable no-descending-specificity */

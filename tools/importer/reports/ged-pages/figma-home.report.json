@@ -2,11 +2,12 @@
   "status": "success",
   "url": "https://www.ged.com/en/",
   "path": "ged-pages/figma-home",
-  "timestamp": "2026-08-18T02:53:26.925Z",
+  "timestamp": "2026-08-18T04:58:56.753Z",
   "title": "Accepting University Search Archive - GED - Other Countries",
   "template": "figma-home",
   "blocks": [
+    "hero (positivus)",
+    "cards (positivus)",
     "accordion (positivus)"
-  ],
-  "stepCount": 4
+  ]
 }
