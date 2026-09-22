@@ -5,6 +5,7 @@
       "previewSite": "blogs-demo",
       "aemSitePath": "/content/blogs-888",
       "aemAssetsFolderPath": "/content/dam/blogs-888",
+      "contentHostUrl":"https://author-p50156-e1509324.adobeaemcloud.com"
       "aemSiteName": "blogs-888",
       "aemSiteTitle": "Blogs Site Demo"
     }
